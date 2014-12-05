@@ -1,0 +1,15 @@
+#!/bin/bash
+main() {
+    clonePath=$("pwd")
+
+    ln -sf "$clonePath/.bash_profile" "$HOME/.bash_profile"
+    ln -sf "$clonePath/.eslintrc" "$HOME/.eslintrc"
+    ln -sf "$clonePath/.gitconfig" "$HOME/.gitconfig"
+    ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
+    ln -sf "$clonePath/.vimrc" "$HOME/.vimrc"
+    ln -sf "$clonePath/.vim" "$HOME"
+
+    echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
+}
+
+main;
