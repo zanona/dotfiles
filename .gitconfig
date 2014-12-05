@@ -1,0 +1,13 @@
+[user]
+	name = Marcus Zanona
+	email = zanona@me.com
+[mergetool]
+	keepBackup = true
+[core]
+    editor = vim
+[credential]
+	helper = osxkeychain
+[difftool]
+	prompt = false
+[push]
+	default = simple
