@@ -8,6 +8,7 @@ main() {
     ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
     ln -sf "$clonePath/.vimrc" "$HOME/.vimrc"
     ln -sf "$clonePath/.vim" "$HOME"
+    ln -sf "$clonePath/.ssh" "$HOME"
 
     echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
 }
