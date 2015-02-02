@@ -52,7 +52,8 @@ set ofu=syntaxcomplete#Complete
 " syntastic
 let g:syntastic_go_checkers = []
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_checkers= ['w3']
+let g:syntastic_html_checkers = ['w3']
+let g:syntastic_less_checkers = ['lessc']
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "context"
@@ -64,10 +65,6 @@ set backupdir=.,$TEMP  " Keep swap files in one location
 
 " Emmet-vim
 let g:user_emmet_settings = {'html':{'quote_char': "",},}
-
-
-" Vim Javascript Syntax Plugin
-au FileType javascript call JavaScriptFold()
 
 " UNCOMMENT TO USE
 set expandtab                     " Use spaces instead of tabs
@@ -82,12 +79,6 @@ set laststatus=2                  " Show the status line all the time
 
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-
-
-
-
-" NERDTree
-let NERDTreeShowHidden=0
 
 " CtrlP
 if executable('ag')
