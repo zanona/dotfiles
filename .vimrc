@@ -158,6 +158,7 @@ noremap   <Right>  <NOP>
 " nnoremap <C-n> :call NumberToggle()<cr>
 " Forces *.md files to be rendered as Markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd BufNewFile,BufReadPost volofile set filetype=javascript
 
 " Customise folded blocks presentation
 function! MyFoldText()
