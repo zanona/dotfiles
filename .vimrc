@@ -69,8 +69,8 @@ let g:user_emmet_settings = {'html':{'quote_char': "",},}
 " UNCOMMENT TO USE
 set expandtab                     " Use spaces instead of tabs
 set smartindent                   " Auto indent new lines
-set tabstop=4                     " Use 4 spaces as default
-set shiftwidth=4
+set tabstop=2                     " Use 4 spaces as default
+set shiftwidth=2
 
 set foldmethod=syntax             "Set default folding method to 'syntax'
 " set foldclose=all                 "Auto-closes folds afer cursor moves out
