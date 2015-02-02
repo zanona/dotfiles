@@ -5,21 +5,24 @@ HISTCONTROL=erasedups
 # [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
 
 exports() {
+    source `ls -la ~/.ssh/credentials.sh | awk '{ print $9 }'`
     export PYTHONPATH="/usr/local/bin/python:/usr/local/share/python"
     export HEROKU_PATH="/usr/local/heroku/bin"
     # export GOPATH="$HOME/Desktop/go"
     # export NODE_PATH="$BACKUP_PATH/lib/node_modules"
-    export PATH="/bin:$HEROKU_PATH:$GOPATH/bin:/usr/local/bin:$PATH"
+    export LOCAL_NODE_PATH="./node_modules/.bin"
+    export PATH="/bin:/usr/local/bin:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$PATH"
     export EDITOR="vi -w"
     export TERM="xterm-256color"
     export CLICOLOR=1
-    export LSCOLORS="gxfxcxdxbxegedabagacad"
+    export LSCOLORS="bxfxcxdxbxegedabagacad"
     # more at http://it.toolbox.com/blogs/lim/how-to-fix-colors-on-mac-osx-terminal-37214
 }
 
 alias tarz="tar -zcvf archive.tar.gz"
 alias update="source ~/.bash_profile"
 alias sync="rsync -azP --del --exclude-from .deployignore"
+alias server="browser-sync start --server --startPath build"
 
 transfer() {
     # write to output to tmpfile because of progress bar
@@ -137,7 +140,7 @@ _EOF_
     # s3cmd info s3://$domain
 }
 
-s3push() {
+s3push-old() {
     local dpath=$(basename "$PWD")
     local fpath=(`echo`)
     local i=0
@@ -159,6 +162,10 @@ s3push() {
     fi
 
     s3cmd sync ./ "s3://$b" --delete-removed --exclude ".DS_Store" --exclude ".htaccess" --exclude ".s3ignore" --exclude ".git/*" --exclude "src/*" "$2"
+}
+s3push() {
+    s3cmd sync "$1" "s3://$2" --delete-removed
+    #--add-header='Cache-Control:max-age=31536000, public' --add-header='Content-Encoding: gzip'
 }
 
 coresync() {
