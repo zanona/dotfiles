@@ -75,6 +75,12 @@ set shiftwidth=2
 set foldmethod=syntax             "Set default folding method to 'syntax'
 " set foldclose=all                 "Auto-closes folds afer cursor moves out
 
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window. Protect against
+" screwing up folding when switching between windows.
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+
 set laststatus=2                  " Show the status line all the time
 
 " Useful status information at bottom of screen
