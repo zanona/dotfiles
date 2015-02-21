@@ -19,7 +19,7 @@ if has('reltime')
     lockvar! g:_SYNTASTIC_START
 endif
 
-let g:_SYNTASTIC_VERSION = '3.5.0-72'
+let g:_SYNTASTIC_VERSION = '3.6.0-20'
 lockvar g:_SYNTASTIC_VERSION
 
 " Sanity checks {{{1
@@ -42,15 +42,21 @@ endfor
 let s:_running_windows = syntastic#util#isRunningWindows()
 lockvar s:_running_windows
 
-if !s:_running_windows && executable('uname')
+if s:_running_windows
+    let g:_SYNTASTIC_UNAME = 'Windows'
+elseif executable('uname')
     try
-        let s:_uname = system('uname')
+        let g:_SYNTASTIC_UNAME = split(system('uname'), "\n")[0]
     catch /\m^Vim\%((\a\+)\)\=:E484/
         call syntastic#log#error("your shell " . &shell . " can't handle traditional UNIX syntax for redirections")
         finish
+    catch /\m^Vim\%((\a\+)\)\=:E684/
+        let g:_SYNTASTIC_UNAME = 'Unknown'
     endtry
-    lockvar s:_uname
+else
+    let g:_SYNTASTIC_UNAME = 'Unknown'
 endif
+lockvar g:_SYNTASTIC_UNAME
 
 " }}}1
 
@@ -260,7 +266,7 @@ function! s:BufEnterHook() " {{{2
         let loclist = filter(copy(getloclist(0)), 'v:val["valid"] == 1')
         let owner = str2nr(getbufvar(bufnr(""), 'syntastic_owner_buffer'))
         let buffers = syntastic#util#unique(map(loclist, 'v:val["bufnr"]') + (owner ? [owner] : []))
-        if !empty(loclist) && empty(filter( buffers, 'syntastic#util#bufIsActive(v:val)' ))
+        if get(w:, 'syntastic_loclist_set', 0) && !empty(loclist) && empty(filter( buffers, 'syntastic#util#bufIsActive(v:val)' ))
             call SyntasticLoclistHide()
         endif
     endif
@@ -270,7 +276,9 @@ function! s:QuitPreHook() " {{{2
     call syntastic#log#debug(g:_SYNTASTIC_DEBUG_AUTOCOMMANDS,
         \ 'autocmd: QuitPre, buffer ' . bufnr("") . ' = ' . string(bufname(str2nr(bufnr("")))))
     let b:syntastic_skip_checks = get(b:, 'syntastic_skip_checks', 0) || !syntastic#util#var('check_on_wq')
-    call SyntasticLoclistHide()
+    if get(w:, 'syntastic_loclist_set', 0)
+        call SyntasticLoclistHide()
+    endif
 endfunction " }}}2
 
 " }}}1
@@ -289,7 +297,7 @@ function! s:UpdateErrors(auto_invoked, checker_names) " {{{2
     endif
 
     call s:modemap.synch()
-    let run_checks = !a:auto_invoked || s:modemap.allowsAutoChecking(&filetype)
+    let run_checks = !a:auto_invoked || s:modemap.doAutoChecking()
     if run_checks
         call s:CacheErrors(a:checker_names)
     endif
@@ -301,11 +309,13 @@ function! s:UpdateErrors(auto_invoked, checker_names) " {{{2
     endif
 
     " populate loclist and jump {{{3
-    let do_jump = syntastic#util#var('auto_jump')
+    let do_jump = syntastic#util#var('auto_jump') + 0
     if do_jump == 2
-        let first = loclist.getFirstIssue()
-        let type = get(first, 'type', '')
-        let do_jump = type ==? 'E'
+        let do_jump = loclist.getFirstError(1)
+    elseif do_jump == 3
+        let do_jump = loclist.getFirstError()
+    elseif 0 > do_jump || do_jump > 3
+        let do_jump = 0
     endif
 
     let w:syntastic_loclist_set = 0
@@ -315,7 +325,7 @@ function! s:UpdateErrors(auto_invoked, checker_names) " {{{2
         let w:syntastic_loclist_set = 1
         if run_checks && do_jump && !loclist.isEmpty()
             call syntastic#log#debug(g:_SYNTASTIC_DEBUG_NOTIFICATIONS, 'loclist: jump')
-            silent! lrewind
+            execute 'silent! lrewind ' . do_jump
 
             " XXX: Vim doesn't call autocmd commands in a predictible
             " order, which can lead to missing filetype when jumping
@@ -347,7 +357,8 @@ function! s:CacheErrors(checker_names) " {{{2
     if !s:_skip_file()
         " debug logging {{{3
         call syntastic#log#debugShowVariables(g:_SYNTASTIC_DEBUG_TRACE, 'aggregate_errors')
-        call syntastic#log#debug(g:_SYNTASTIC_DEBUG_TRACE, 'getcwd() = ' . getcwd())
+        call syntastic#log#debug(g:_SYNTASTIC_DEBUG_CHECKERS, '$PATH = ' . string($PATH))
+        call syntastic#log#debug(g:_SYNTASTIC_DEBUG_TRACE, 'getcwd() = ' . string(getcwd()))
         " }}}3
 
         let filetypes = s:_resolve_filetypes([])
@@ -603,7 +614,7 @@ endfunction " }}}2
 
 " Skip running in special buffers
 function! s:_skip_file() " {{{2
-    let fname = expand('%')
+    let fname = expand('%', 1)
     let skip = get(b:, 'syntastic_skip_checks', 0) || (&buftype != '') ||
         \ !filereadable(fname) || getwinvar(0, '&diff') || s:_ignore_file(fname) ||
         \ fnamemodify(fname, ':e') =~? g:syntastic_ignore_extensions
@@ -617,7 +628,7 @@ endfunction " }}}2
 function! s:_explain_skip(filetypes) " {{{2
     if empty(a:filetypes) && s:_skip_file()
         let why = []
-        let fname = expand('%')
+        let fname = expand('%', 1)
 
         if get(b:, 'syntastic_skip_checks', 0)
             call add(why, 'b:syntastic_skip_checks set')
@@ -674,11 +685,7 @@ function! s:_bash_hack() " {{{2
 endfunction " }}}2
 
 function! s:_os_name() " {{{2
-    if !exists('s:_uname')
-        let s:_uname = system('uname')
-        lockvar s:_uname
-    endif
-    return s:_uname
+    return g:_SYNTASTIC_UNAME
 endfunction " }}}2
 
 " }}}1
