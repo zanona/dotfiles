@@ -39,7 +39,8 @@ set laststatus=2                  " Show the status line all the time
 set statusline=%!MyStatusLine()   " Format status line text
 
 " Plugin-specific settings
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['jslint']
+let g:syntastic_javascript_jslint_args = ' '
 let g:syntastic_html_checkers       = ['w3']
 let g:syntastic_less_checkers       = ['lessc']
 let g:user_emmet_settings           = {'html':{'quote_char': "",},}

@@ -3,7 +3,7 @@ main() {
     clonePath=$("pwd")
 
     ln -sf "$clonePath/.bash_profile" "$HOME/.bash_profile"
-    ln -sf "$clonePath/.eslintrc" "$HOME/.eslintrc"
+    ln -sf "$clonePath/.jslintrc" "$HOME/.jslintrc"
     ln -sf "$clonePath/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
     ln -sf "$clonePath/.vimrc" "$HOME/.vimrc"
