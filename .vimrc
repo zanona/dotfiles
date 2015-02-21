@@ -44,8 +44,6 @@ let g:syntastic_javascript_jslint_args = ' '
 let g:syntastic_html_checkers       = ['w3']
 let g:syntastic_less_checkers       = ['lessc']
 let g:user_emmet_settings           = {'html':{'quote_char': "",},}
-let g:goyo_margin_top               = 0
-let g:goyo_margin_bottom            = 0
 
 " MAPPINGS
 " ==============================================================================
@@ -68,7 +66,8 @@ autocmd       InsertLeave,WinLeave    *        call <SID>OnInsertModeLeave()
 autocmd  User GoyoEnter                        call <SID>OnGoyoEnter()
 autocmd  User GoyoLeave                        call <SID>OnGoyoLeave()
 autocmd       BufNewFile,BufReadPost  *.md     set  filetype=markdown
-autocmd       VimEnter                * Goyo
+" autocmd       VimEnter                * Goyo
+autocmd       VimEnter                * call <SID>GoMinimal()
 autocmd       VimLeave                * silent !tmux set status on
 
 
@@ -103,13 +102,25 @@ function! s:OnGoyoEnter()
   set noshowmode
   set noshowcmd
   set scrolloff=999               " Always leave cursor in the middle
-  silent !tmux set status off
+  if exists('$TMUX')
+    silent !tmux set status off
+  endif
 endfunction
 
 function! s:OnGoyoLeave()
-  set showmode
-  set showcmd
-  set scrolloff=3
-  silent !tmux set status on
+  " set showmode
+  " set showcmd
+  " set scrolloff=3
 endfunction
 
+function! s:GoMinimal()
+  set noshowmode
+  set noshowcmd
+  set noruler
+  set nonu
+  set scrolloff=999
+  set laststatus=0
+  if exists('$TMUX')
+    silent !tmux set status off
+  endif
+endfunction
