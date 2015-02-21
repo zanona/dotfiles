@@ -1,9 +1,8 @@
 let s:level = 0
-let s:tags = 'nav|header|section|aside|article|footer|script|style'
+let s:tags = 'nav|header|section|aside|article|form|footer|ul|script|style'
 
 function! HTMLFolds()
   let line = getline(v:lnum)
-  let prev = getline(v:lnum - 1)
 
   " Ignore tags that open and close in the same line
   if line =~ '\v\<(\w+).*\<\/\1'
