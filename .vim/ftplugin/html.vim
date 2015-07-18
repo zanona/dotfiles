@@ -24,4 +24,4 @@ function! HTMLFolds()
 endfunction
 
 setlocal foldmethod=expr
-setlocal foldexpr=HTMLFolds()
+"setlocal foldexpr=HTMLFolds()
