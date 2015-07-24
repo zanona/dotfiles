@@ -73,6 +73,17 @@ endif
 
 " }}}1
 
+" Constants {{{1
+
+let s:_FILE_SHORTCUTS = {
+        \ '%FILE_PATH%':  '%:p',
+        \ '%FILE_NAME%':  '%:t',
+        \ '%FILE_DIR%':   '%:p:h',
+    \ }
+lockvar! s:_FILE_SHORTCUTS
+
+" }}}1
+
 command! SyntasticJavacEditClasspath call s:EditClasspath()
 
 if g:syntastic_java_javac_config_file_enabled
@@ -103,7 +114,7 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
     let javac_classpath = ''
 
     for path in split(g:syntastic_java_javac_classpath, s:ClassSep())
-        if path != ''
+        if path !=# ''
             try
                 let ps = glob(path, 1, 1)
             catch
@@ -128,8 +139,13 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
     " }}}2
 
     " load custom classpath {{{2
-    if g:syntastic_java_javac_custom_classpath_command != ''
-        let lines = system(g:syntastic_java_javac_custom_classpath_command)
+    if g:syntastic_java_javac_custom_classpath_command !=# ''
+        " Pre-process the classpath command string a little.
+        let classpath_command = g:syntastic_java_javac_custom_classpath_command
+        for [key, val] in items(s:_FILE_SHORTCUTS)
+            let classpath_command = substitute(classpath_command, '\V' . key, syntastic#util#shexpand(val), 'g')
+        endfor
+        let lines = syntastic#util#system(classpath_command)
         if syntastic#util#isRunningWindows() || has('win32unix')
             let lines = substitute(lines, "\r\n", "\n", 'g')
         endif
@@ -138,7 +154,7 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
         endfor
     endif
 
-    if javac_classpath != ''
+    if javac_classpath !=# ''
         let javac_opts .= ' -cp ' . syntastic#util#shexpand(javac_classpath)
     endif
     " }}}2
@@ -146,7 +162,7 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
     let fname = expand('%:p:h', 1) . syntastic#util#Slash() . expand ('%:t', 1)
 
     if has('win32unix')
-        let fname = s:CygwinPath(fname)
+        let fname = syntastic#util#CygwinPath(fname)
     endif
 
     let makeprg = self.makeprgBuild({
@@ -155,14 +171,14 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
 
     " unashamedly stolen from *errorformat-javac* (quickfix.txt) and modified to include error types
     let errorformat =
-        \ '%E%f:%l:\ error:\ %m,'.
-        \ '%W%f:%l:\ warning:\ %m,'.
-        \ '%A%f:%l:\ %m,'.
+        \ '%E%f:%l: error: %m,'.
+        \ '%W%f:%l: warning: %m,'.
+        \ '%A%f:%l: %m,'.
         \ '%+Z%p^,'.
         \ '%+C%.%#,'.
         \ '%-G%.%#'
 
-    if output_dir != ''
+    if output_dir !=# ''
         silent! call mkdir(output_dir, 'p')
     endif
     let errors = SyntasticMake({
@@ -170,7 +186,7 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
         \ 'errorformat': errorformat,
         \ 'postprocess': ['cygwinRemoveCR'] })
 
-    if output_dir != ''
+    if output_dir !=# ''
         call syntastic#util#rmrf(output_dir)
     endif
     return errors
@@ -178,10 +194,6 @@ function! SyntaxCheckers_java_javac_GetLocList() dict " {{{1
 endfunction " }}}1
 
 " Utilities {{{1
-
-function! s:CygwinPath(path) " {{{2
-    return substitute(system('cygpath -m ' . syntastic#util#shescape(a:path)), "\n", '', 'g')
-endfunction " }}}2
 
 function! s:RemoveCarriageReturn(line) " {{{2
     return substitute(a:line, "\r", '', 'g')
@@ -192,10 +204,10 @@ function! s:ClassSep() " {{{2
 endfunction " }}}2
 
 function! s:AddToClasspath(classpath, path) " {{{2
-    if a:path == ''
+    if a:path ==# ''
         return a:classpath
     endif
-    return (a:classpath != '') ? a:classpath . s:ClassSep() . a:path : a:path
+    return (a:classpath !=# '') ? a:classpath . s:ClassSep() . a:path : a:path
 endfunction " }}}2
 
 function! s:SplitClasspath(classpath) " {{{2
@@ -303,14 +315,14 @@ endfunction " }}}2
 
 function! s:GetMavenProperties() " {{{2
     let mvn_properties = {}
-    let pom = findfile('pom.xml', '.;')
+    let pom = syntastic#util#findFileInParent('pom.xml', expand('%:p:h', 1))
     if s:has_maven && filereadable(pom)
         if !has_key(g:syntastic_java_javac_maven_pom_properties, pom)
             let mvn_cmd = syntastic#util#shexpand(g:syntastic_java_maven_executable) .
                 \ ' -f ' . syntastic#util#shescape(pom) .
                 \ ' ' . g:syntastic_java_maven_options
             let mvn_is_managed_tag = 1
-            let mvn_settings_output = split(system(mvn_cmd . ' help:effective-pom'), "\n")
+            let mvn_settings_output = split(syntastic#util#system(mvn_cmd . ' help:effective-pom'), "\n")
             let current_path = 'project'
             for line in mvn_settings_output
                 let matches = matchlist(line, '\m^\s*<\([a-zA-Z0-9\-\.]\+\)>\s*$')
@@ -338,13 +350,13 @@ function! s:GetMavenProperties() " {{{2
 endfunction " }}}2
 
 function! s:GetMavenClasspath() " {{{2
-    let pom = findfile('pom.xml', '.;')
+    let pom = syntastic#util#findFileInParent('pom.xml', expand('%:p:h', 1))
     if s:has_maven && filereadable(pom)
         if !has_key(g:syntastic_java_javac_maven_pom_ftime, pom) || g:syntastic_java_javac_maven_pom_ftime[pom] != getftime(pom)
             let mvn_cmd = syntastic#util#shexpand(g:syntastic_java_maven_executable) .
                 \ ' -f ' . syntastic#util#shescape(pom) .
                 \ ' ' . g:syntastic_java_maven_options
-            let mvn_classpath_output = split(system(mvn_cmd . ' dependency:build-classpath'), "\n")
+            let mvn_classpath_output = split(syntastic#util#system(mvn_cmd . ' dependency:build-classpath'), "\n")
             let mvn_classpath = ''
             let class_path_next = 0
 
@@ -360,13 +372,14 @@ function! s:GetMavenClasspath() " {{{2
 
             let mvn_properties = s:GetMavenProperties()
 
-            let output_dir = 'target/classes'
+            let sep = syntastic#util#Slash()
+            let output_dir = join(['target', 'classes'], sep)
             if has_key(mvn_properties, 'project.build.outputDirectory')
                 let output_dir = mvn_properties['project.build.outputDirectory']
             endif
             let mvn_classpath = s:AddToClasspath(mvn_classpath, output_dir)
 
-            let test_output_dir = 'target/test-classes'
+            let test_output_dir = join(['target', 'test-classes'], sep)
             if has_key(mvn_properties, 'project.build.testOutputDirectory')
                 let test_output_dir = mvn_properties['project.build.testOutputDirectory']
             endif
@@ -381,28 +394,30 @@ function! s:GetMavenClasspath() " {{{2
 endfunction " }}}2
 
 function! s:MavenOutputDirectory() " {{{2
-    let pom = findfile('pom.xml', '.;')
+    let pom = syntastic#util#findFileInParent('pom.xml', expand('%:p:h', 1))
     if s:has_maven && filereadable(pom)
         let mvn_properties = s:GetMavenProperties()
         let output_dir = getcwd()
         if has_key(mvn_properties, 'project.properties.build.dir')
             let output_dir = mvn_properties['project.properties.build.dir']
         endif
-        if stridx(expand('%:p:h', 1), 'src.main.java') >= 0
-            let output_dir .= '/target/classes'
+
+        let sep = syntastic#util#Slash()
+        if stridx(expand('%:p:h', 1), join(['src', 'main', 'java'], sep)) >= 0
+            let output_dir = join ([output_dir, 'target', 'classes'], sep)
             if has_key(mvn_properties, 'project.build.outputDirectory')
                 let output_dir = mvn_properties['project.build.outputDirectory']
             endif
         endif
-        if stridx(expand('%:p:h', 1), 'src.test.java') >= 0
-            let output_dir .= '/target/test-classes'
+        if stridx(expand('%:p:h', 1), join(['src', 'test', 'java'], sep)) >= 0
+            let output_dir = join([output_dir, 'target', 'test-classes'], sep)
             if has_key(mvn_properties, 'project.build.testOutputDirectory')
                 let output_dir = mvn_properties['project.build.testOutputDirectory']
             endif
         endif
 
         if has('win32unix')
-            let output_dir = s:CygwinPath(output_dir)
+            let output_dir = syntastic#util#CygwinPath(output_dir)
         endif
         return output_dir
     endif
