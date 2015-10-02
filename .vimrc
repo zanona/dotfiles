@@ -71,6 +71,8 @@ autocmd       BufNewFile,BufReadPost  *.md     set  filetype=markdown
 autocmd       VimEnter                * call <SID>GoMinimal()
 autocmd       VimLeave                * silent !tmux set status on
 
+autocmd Syntax html set foldmethod=expr foldexpr=HTMLFolds()
+autocmd Syntax javascript,less set foldmethod=syntax
 
 " UTILITY METHODS
 " ==============================================================================
