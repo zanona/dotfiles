@@ -45,7 +45,7 @@ let g:syntastic_html_checkers       = ['tidy']
 " Use HTML5 version of tidy `brew install tidy --HEAD`
 let g:syntastic_html_tidy_exec      = 'tidy5'
 let g:syntastic_less_checkers       = ['lessc']
-let g:user_emmet_settings           = {'html':{'quote_char': "",},}
+let g:user_emmet_settings           = {'html':{'quote_char': '',},}
 
 " MAPPINGS
 " ==============================================================================
