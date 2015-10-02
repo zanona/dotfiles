@@ -42,8 +42,7 @@ set statusline=%!MyStatusLine()   " Format status line text
 let g:syntastic_javascript_checkers = ['jslint']
 let g:syntastic_javascript_jslint_args = ''
 let g:syntastic_html_checkers       = ['tidy']
-" Use HTML5 version of tidy `brew install tidy --HEAD`
-let g:syntastic_html_tidy_exec      = 'tidy5'
+" Install tidy `brew install tidy-html5`
 let g:syntastic_less_checkers       = ['lessc']
 let g:user_emmet_settings           = {'html':{'quote_char': '',},}
 
