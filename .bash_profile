@@ -72,6 +72,17 @@ add_dock_spacer() {
     defaults write com.apple.dock persistent-apps -array-add '{ "tile-type" = "spacer-tile"; }'
     killall Dock
 }
+
+# Show/Hide invisible files
+function hideFiles() {
+    defaults write com.apple.finder AppleShowAllFiles -bool NO
+    killall Finder
+}
+function showFiles() {
+    defaults write com.apple.finder AppleShowAllFiles -bool YES
+    killall Finder
+}
+
 # Set font anti-aliasing
 smoothing() {
     # $1 font-smoothing level
