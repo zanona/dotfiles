@@ -10,6 +10,8 @@ main() {
     ln -sf "$clonePath/.vim" "$HOME"
     ln -sf "$clonePath/.ssh" "$HOME"
 
+    sh keybindings.sh
+
     echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
 }
 
