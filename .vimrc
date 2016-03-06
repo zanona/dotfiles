@@ -40,7 +40,7 @@ set statusline=%!MyStatusLine()   " Format status line text
 
 " Plugin-specific settings
 let g:syntastic_javascript_checkers = ['jslint']
-let g:syntastic_javascript_jslint_args = ''
+let g:syntastic_javascript_jslint_args = '--edition=latest'
 let g:syntastic_html_checkers       = ['tidy']
 let g:syntastic_yaml_checkers       = ['jsyaml', 'swagger']
 " Install tidy `brew install tidy-html5`
