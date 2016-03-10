@@ -37,8 +37,10 @@ set foldtext=MyFoldText()         " Customise folded blocks presentation
 set fillchars="fold:\ "           " Fill empty folding chars with spaces
 set laststatus=2                  " Show the status line all the time
 set statusline=%!MyStatusLine()   " Format status line text
+set iskeyword-=_                  " Treat _ as word boundary
 
 " Plugin-specific settings
+" let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers       = ['tidy']
 let g:syntastic_yaml_checkers       = ['jsyaml']
