@@ -42,7 +42,7 @@ set statusline=%!MyStatusLine()   " Format status line text
 let g:syntastic_javascript_checkers = ['jslint']
 let g:syntastic_javascript_jslint_args = '--edition=latest'
 let g:syntastic_html_checkers       = ['tidy']
-let g:syntastic_yaml_checkers       = ['jsyaml', 'swagger']
+let g:syntastic_yaml_checkers       = ['jsyaml']
 " Install tidy `brew install tidy-html5`
 let g:syntastic_less_checkers       = ['lessc']
 let g:user_emmet_settings           = {'html':{'quote_char': '',},}
@@ -74,6 +74,9 @@ autocmd       VimLeave                * silent !tmux set status on
 
 autocmd Syntax html set foldmethod=expr foldexpr=HTMLFolds()
 autocmd Syntax javascript,less set foldmethod=syntax
+
+" enable swagger syntax checker only for swagger.yaml files
+autocmd BufRead swagger.yaml let g:syntastic_yaml_checkers = ['jsyaml', 'swagger']
 
 " disable syntax highlighting for large files
 autocmd BufWinEnter * call CheckBigFile()
