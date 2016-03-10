@@ -75,6 +75,15 @@ autocmd       VimLeave                * silent !tmux set status on
 autocmd Syntax html set foldmethod=expr foldexpr=HTMLFolds()
 autocmd Syntax javascript,less set foldmethod=syntax
 
+" disable syntax highlighting for large files
+autocmd BufWinEnter * call CheckBigFile()
+function CheckBigFile()
+  if line2byte(line("$") + 1) > 1000000
+    syntax clear
+    let b:syntastic_mode="passive"
+  endif
+endfunction
+
 " UTILITY METHODS
 " ==============================================================================
 
