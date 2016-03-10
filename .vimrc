@@ -39,8 +39,7 @@ set laststatus=2                  " Show the status line all the time
 set statusline=%!MyStatusLine()   " Format status line text
 
 " Plugin-specific settings
-let g:syntastic_javascript_checkers = ['jslint']
-let g:syntastic_javascript_jslint_args = '--edition=latest'
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers       = ['tidy']
 let g:syntastic_yaml_checkers       = ['jsyaml']
 " Install tidy `brew install tidy-html5`
@@ -108,6 +107,7 @@ function! s:OnInsertModeEnter()
 endfunction
 
 function! s:OnInsertModeLeave()
+  set nopaste "disable paste when leaving insert mode
   if exists('w:last_fdm')
     let &l:foldmethod = w:last_fdm
     unlet w:last_fdm
