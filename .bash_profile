@@ -25,6 +25,8 @@ alias update="source ~/.bash_profile"
 alias sync="rsync -azP --del --exclude-from .deployignore"
 alias server="browser-sync start --server --startPath build"
 
+sts() { eval "$(sts-switch)"; }
+
 transfer() {
     # write to output to tmpfile because of progress bar
     tmpfile=$( mktemp -t transferXXX ); curl --progress-bar --upload-file $1 https://transfer.sh/$(basename $1) >> $tmpfile;
