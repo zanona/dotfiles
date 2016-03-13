@@ -19,6 +19,7 @@ exports() {
     # more at http://it.toolbox.com/blogs/lim/how-to-fix-colors-on-mac-osx-terminal-37214
 }
 
+alias vi="vim"
 alias tarz="tar -zcvf archive.tar.gz"
 alias update="source ~/.bash_profile"
 alias sync="rsync -azP --del --exclude-from .deployignore"
