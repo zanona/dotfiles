@@ -40,6 +40,8 @@ set statusline=%!MyStatusLine()   " Format status line text
 set iskeyword-=_                  " Treat _ as word boundary
 
 " Plugin-specific settings
+let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
+
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_sh_shellcheck_args = '-x'
 let g:syntastic_vim_checkers = ['vimlint']
