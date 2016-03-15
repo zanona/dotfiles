@@ -41,6 +41,8 @@ set iskeyword-=_                  " Treat _ as word boundary
 
 " Plugin-specific settings
 " let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_sh_shellcheck_args = '-x'
+let g:syntastic_vim_checkers = ['vimlint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers       = ['tidy']
 let g:syntastic_yaml_checkers       = ['jsyaml']
