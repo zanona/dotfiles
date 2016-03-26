@@ -47,7 +47,7 @@ let g:syntastic_sh_shellcheck_args = '-x'
 let g:syntastic_vim_checkers = ['vimlint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers       = ['tidy']
-let g:syntastic_yaml_checkers       = ['jsyaml']
+let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
 " Install tidy `brew install tidy-html5`
 let g:syntastic_less_checkers       = ['lessc']
 let g:user_emmet_settings           = {'html':{'quote_char': '',},}
