@@ -81,7 +81,7 @@ autocmd Syntax html set foldmethod=expr foldexpr=HTMLFolds()
 autocmd Syntax javascript,less set foldmethod=syntax
 
 " enable swagger syntax checker only for swagger.yaml files
-autocmd BufRead swagger.yaml let g:syntastic_yaml_checkers = ['jsyaml', 'swagger']
+" autocmd BufRead swagger.yaml let g:syntastic_yaml_checkers = ['jsyaml', 'swagger']
 
 " disable syntax highlighting for large files
 autocmd BufWinEnter * call CheckBigFile()
@@ -106,18 +106,18 @@ function! MyFoldText()
 endfunction
 
 function! s:OnInsertModeEnter()
-  if !exists('w:last_fdm')
-    let w:last_fdm = &foldmethod
-    setlocal foldmethod=manual
-  endif
+"   if !exists('w:last_fdm')
+"     let w:last_fdm = &foldmethod
+"     setlocal foldmethod=manual
+"   endif
 endfunction
 
 function! s:OnInsertModeLeave()
   set nopaste "disable paste when leaving insert mode
-  if exists('w:last_fdm')
-    let &l:foldmethod = w:last_fdm
-    unlet w:last_fdm
-  endif
+  "if exists('w:last_fdm')
+  "  let &l:foldmethod = w:last_fdm
+  "  unlet w:last_fdm
+  "endif
 endfunction
 
 function! s:OnGoyoEnter()
