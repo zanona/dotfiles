@@ -17,12 +17,10 @@ rules:
   no-regex-spaces: 1 # prevent multiple spaces in regex
   no-sparse-arrays: 1 # prevent [,2,3,,1,]
   no-unexpected-multiline: 1
-  no-unreachable: 1 # prevent declarations after return; 
+  no-unreachable: 1 # prevent declarations after return;
   valid-typeof: 2 # compare typeof against valid type strings
   no-dupe-keys: 2 # prevent dupe object keys
   no-dupe-args: 2 # prevent dupe fn args
-# STRICT MODE
-  strict:  1 # use strict
 # VARIABLES
   no-undef: 2      # prevent undefined vars
   no-undefined: 2  # prevent var undefined = x;
@@ -37,7 +35,10 @@ rules:
   no-catch-shadow: 1 # prevent renaming catch err
   no-shadow-restricted-names: 2 #prevent reserved names
 # ES6
-  arrow-parens: [1]
+ #strict:          [1, safe] # use strict
+  arrow-parens:    [1] # remind of parens in arrow fn (() => x )
+  no-const-assign: [2] # prevent const re-assignment
+  prefer-const:    [1] # warns about `let` not re-assigned
 # BEST PRACTICES
   eqeqeq:  1 # === and !==
 # STYLE
