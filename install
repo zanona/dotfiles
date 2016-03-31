@@ -4,6 +4,7 @@ main() {
 
     ln -sf "$clonePath/.bash_profile" "$HOME/.bash_profile"
     ln -sf "$clonePath/.eslintrc.yaml" "$HOME/.eslintrc.yaml"
+    ln -sf "$clonePath/.gitignore" "$HOME/.gitignore"
     ln -sf "$clonePath/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
     ln -sf "$clonePath/.vimrc" "$HOME/.vimrc"

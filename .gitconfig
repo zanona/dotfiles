@@ -2,9 +2,10 @@
 	name = Marcus Zanona
 	email = zanona@me.com
 [mergetool]
-	keepBackup = true
+	keepBackup = false
 [core]
-    editor = vim
+  editor = vim
+	excludesfile = ~/.gitignore
 [credential]
 	helper = osxkeychain
 [difftool]
