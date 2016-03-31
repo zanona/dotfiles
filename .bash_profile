@@ -1,5 +1,5 @@
 #!/bin/bash
-HISTCONTROL=erasedups
+HISTCONTROL=ignoreboth:erasedups #prevent repeated items in history
 
 # Base16 Shell
 # BASE16_SHELL="$HOME/.config/base16-shell/base16-ocean.dark.sh"
