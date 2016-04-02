@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 # $ shift
 # ^ control
 # ~ alt/option
@@ -6,12 +8,16 @@
 # more http://superuser.com/questions/670584
 # more http://osxnotes.net/keybindings.html
 
+defaults write -g NSUserKeyEquivalents '{
+  "Start Speaking" = "~@s";
+}'
+
 defaults write -app Safari NSUserKeyEquivalents '{
   "Disable Styles" = "^~@i";
   "Disable JavaScript" = "^~@o";
   "Show Next Tab" = "~@\Uf703";
   "Show Previous Tab" = "~@\Uf702";
-  "Messages" = "~@s";
+  "Messages" = "~@p";
 }'
 defaults write -app Sketch NSUserKeyEquivalents '{
   "Top"    = "^@\Uf700";
