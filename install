@@ -13,6 +13,11 @@ main() {
 
     sh keybindings.sh
 
+    # disable smart dashes globally
+    defaults write 'Apple Global Domain' NSAutomaticDashSubstitutionEnabled 0
+    # disable smart quotes globally
+    # defaults write 'Apple GLobal Domain' NSAutomaticQuoteSubstitutionEnabled 0
+
     echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
 }
 
