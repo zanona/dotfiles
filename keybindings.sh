@@ -19,6 +19,9 @@ defaults write -app Safari NSUserKeyEquivalents '{
   "Show Previous Tab" = "~@\Uf702";
   "Messages" = "~@p";
 }'
+defaults write -app Preview NSUserKeyEquivalents '{
+  "Adjust Size…" = "~@i";
+}'
 defaults write -app Sketch NSUserKeyEquivalents '{
   "Top"    = "^@\Uf700";
   "Bottom" = "^@\Uf701";
