@@ -77,7 +77,9 @@ autocmd  User GoyoLeave                        call <SID>OnGoyoLeave()
 autocmd       BufNewFile,BufReadPost  *.md     set  filetype=markdown
 " autocmd       VimEnter                * Goyo
 autocmd       VimEnter                * call <SID>GoMinimal()
-autocmd       VimLeave                * silent !tmux set status on
+" autocmd       VimLeave                * silent !tmux set status on
+autocmd       BufEnter                * let &titlestring = @%
+"Set terminal title to relative file path
 
 autocmd Syntax html set foldmethod=expr foldexpr=HTMLFolds()
 autocmd Syntax javascript,less set foldmethod=syntax
