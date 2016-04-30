@@ -90,7 +90,7 @@ autocmd Syntax javascript,less set foldmethod=syntax
 " disable syntax highlighting for large files
 autocmd BufWinEnter * call CheckBigFile()
 function CheckBigFile()
-  if line2byte(line("$") + 1) > 1000000
+  if line2byte(line("$") + 1) > 100000
     syntax clear
     let b:syntastic_mode="passive"
   endif
