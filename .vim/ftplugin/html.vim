@@ -1,5 +1,5 @@
 let s:level = 0
-let s:tags = 'nav|header|section|aside|article|form|footer|ul|ol|blockquote|script|style'
+let s:tags = 'div|nav|header|section|aside|article|form|fieldset|footer|ul|ol|table|tbody|thead|tfoot|th|tr|td|blockquote|script|style'
 
 function! HTMLFolds()
   let line = getline(v:lnum)
