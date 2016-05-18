@@ -1,5 +1,5 @@
 let s:level = 0
-let s:tags = 'div|nav|header|section|aside|article|form|fieldset|footer|ul|ol|table|tbody|thead|tfoot|th|tr|td|blockquote|script|style'
+let s:tags = 'div|nav|header|section|aside|article|form|fieldset|label|footer|ul|ol|table|tbody|thead|tfoot|th|tr|td|blockquote|template|script|style'
 
 function! HTMLFolds()
   let line = getline(v:lnum)
@@ -25,6 +25,3 @@ endfunction
 
 "setlocal foldmethod=expr
 "setlocal foldexpr=HTMLFolds()
-
-" Remove anchor tag underline
-hi link htmlLink NONE
