@@ -42,6 +42,7 @@ rules:
   prefer-const:    [1] # warns about `let` not re-assigned
 # BEST PRACTICES
   eqeqeq:  1 # === and !==
+  no-redeclare: 1
 # STYLE
   require-jsdoc: 0
   valid-jsdoc: 1
