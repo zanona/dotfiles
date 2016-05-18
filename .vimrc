@@ -53,7 +53,20 @@ let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
 let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
 " Install tidy `brew install tidy-html5`
 let g:syntastic_less_checkers       = ['lessc']
-let g:user_emmet_settings           = {'html':{'quote_char': '',},}
+let g:user_emmet_settings           = {
+\  'html': {
+\    'quote_char': '',
+\    'default_attributes': {
+\      'label': {},
+\      'select': {},
+\    },
+\   },
+\  'javascript': {
+\    'snippets': {
+\      'log': 'console.log(|)',
+\    },
+\  },
+\}
 
 " MAPPINGS
 " ==============================================================================
