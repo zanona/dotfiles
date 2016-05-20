@@ -44,23 +44,34 @@ set list                          " Show invisible marked chars
 " Plugin-specific settings
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
 
+" Install tidy `brew install tidy-html5`
 " let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_sh_shellcheck_args = '-x'
-let g:syntastic_vim_checkers = ['vimlint']
+let g:syntastic_vim_checkers        = ['vimlint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers       = ['tidy']
-let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
-let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
-" Install tidy `brew install tidy-html5`
 let g:syntastic_less_checkers       = ['lessc']
+let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
+
+let g:syntastic_sh_shellcheck_args  = '-x'
+let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
+
+"Allow syntanstic to run eslint-plugin-html on html files
+"npm i eslint-plugin-html -g
+let g:syntastic_filetype_map        = { 'html': 'javascript' }
+
 let g:user_emmet_settings           = {
 \  'html': {
 \    'quote_char': '',
+\    'indent_blockelement': 1,
 \    'default_attributes': {
 \      'label': {},
 \      'select': {},
 \    },
-\   },
+\    'expandos': {
+\      'label': 'label>span|input',
+\      'select': 'select>option*2',
+\    }
+\  },
 \  'javascript': {
 \    'snippets': {
 \      'log': 'console.log(|)',
