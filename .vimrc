@@ -49,6 +49,11 @@ let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
 
 "Allow syntanstic to run eslint-plugin-html on html files
 "npm i eslint-plugin-html -g
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1 "Show all linter errors
 
 let g:syntastic_vim_checkers        = ['vimlint']
 let g:syntastic_javascript_checkers = ['eslint']
