@@ -64,15 +64,24 @@ let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
 let g:syntastic_sh_shellcheck_args  = '-x'
 let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
 
-let g:user_emmet_settings           = {
+"Igrore Web-Components related errors
+let g:syntastic_html_tidy_ignore_errors = [
+\ "proprietary attribute \"async\"",
+\ "proprietary attribute \"is\"",
+\ "is not recognized!",
+\ "discarding unexpected"
+\ ]
+"Extend Emmet functionality
+let g:user_emmet_settings = {
 \  'html': {
 \    'quote_char': '',
-\    'indent_blockelement': 1,
+\    'indent_blockelement': 0,
 \    'default_attributes': {
 \      'label': {},
 \      'select': {},
 \    },
 \    'expandos': {
+\      'import': 'link[rel=import]',
 \      'label': 'label>span|input',
 \      'select': 'select>option*2',
 \    }
