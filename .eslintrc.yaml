@@ -51,12 +51,12 @@ rules:
   semi:    1 # enforce semi-colon ;
   indent:
     - 1
-    - 4
+    - 2
     - SwitchCase: 1
       VariableDeclarator:
-        var: 1
-        let: 1
-        const: 1
+        var: 2
+        let: 2
+        const: 3
   quotes: [1, single, avoid-escape]
   camelcase: 0
   key-spacing: 0
