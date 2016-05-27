@@ -81,7 +81,9 @@ let g:user_emmet_settings = {
 \      'select': {},
 \    },
 \    'expandos': {
+\      'desc': 'meta[name=description content=${1}]',
 \      'import': 'link[rel=import]',
+\      'mod': "link[rel=import][href=/bower_components/polymer/polymer.html]+dom-module[id=${1}]>(template>style)+script{${newline}    window.Polymer({${newline}      is: '${1}'${newline}    });${newline}  }",
 \      'label': 'label>span|input',
 \      'select': 'select>option*2',
 \    }
