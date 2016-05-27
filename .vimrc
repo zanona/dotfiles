@@ -40,6 +40,8 @@ set statusline=%!MyStatusLine()   " Format status line text
 set iskeyword-=_                  " Treat _ as word boundary
 set listchars=nbsp:☠,tab:▸␣       " Mark nbsp chars
 set list                          " Show invisible marked chars
+set nowrap                        " Prevet line-wrapping by default
+set colorcolumn=80                " Show column for 80 chars
 
 " Plugin-specific settings
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
