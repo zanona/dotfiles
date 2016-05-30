@@ -59,12 +59,14 @@ let g:syntastic_aggregate_errors = 1 "Show all linter errors
 
 let g:syntastic_vim_checkers        = ['vimlint']
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_checkers       = ['tidy', 'eslint']
+let g:syntastic_html_checkers       = ['tidy']
 let g:syntastic_less_checkers       = ['lessc']
 let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
 
+let g:syntastic_less_options        = ['--html']
 let g:syntastic_sh_shellcheck_args  = '-x'
 let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
+
 
 "Igrore Web-Components related errors
 let g:syntastic_html_tidy_ignore_errors = [
@@ -117,6 +119,7 @@ autocmd       InsertEnter             *        call <SID>OnInsertModeEnter()
 autocmd       InsertLeave,WinLeave    *        call <SID>OnInsertModeLeave()
 autocmd  User GoyoEnter                        call <SID>OnGoyoEnter()
 autocmd  User GoyoLeave                        call <SID>OnGoyoLeave()
+autocmd       BufNewFile,BufReadPost  *.html     set  filetype=html.javascript.less
 autocmd       BufNewFile,BufReadPost  *.md     set  filetype=markdown
 " autocmd       VimEnter                * Goyo
 autocmd       VimEnter                * call <SID>GoMinimal()
