@@ -127,9 +127,6 @@ autocmd       VimEnter                * call <SID>GoMinimal()
 autocmd       BufEnter                * let &titlestring = @%
 "Set terminal title to relative file path
 
-autocmd Syntax html set foldmethod=expr foldexpr=HTMLFolds()
-autocmd Syntax javascript,less set foldmethod=syntax
-
 " enable swagger syntax checker only for swagger.yaml files
 " autocmd BufRead swagger.yaml let g:syntastic_yaml_checkers = ['jsyaml', 'swagger']
 
