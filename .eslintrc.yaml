@@ -1,3 +1,5 @@
+globals:
+  WebComponent: false
 parser: babel-eslint
 plugins: [ html ]
 parserOptions:
