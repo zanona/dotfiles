@@ -88,7 +88,9 @@ let g:user_emmet_settings = {
 \    'expandos': {
 \      'desc': 'meta[name=description content=${1}]',
 \      'import': 'link[rel=import]',
-\      'mod': "link[rel=import][href=/bower_components/polymer/polymer.html]+dom-module[id=${1}]>(template>style)+script{${newline}    window.Polymer({${newline}      is: '${1}'${newline}    });${newline}  }",
+\      'x-if':  'template[is=x-if][has=${1}]',
+\      'x-for': 'template[is=x-for][items=${1}]',
+\      'mod': "(template>style)+script{${newline}  module.exports = class extends WebComponent {${newline}  };${newline}}",
 \      'label': 'label>span|input',
 \      'select': 'select>option*2',
 \    }
