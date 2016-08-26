@@ -24,6 +24,7 @@ exports() {
 }
 
 alias vi="vim"
+alias redis="redis-server"
 alias tarz="tar -zcvf archive.tar.gz"
 alias update="source ~/.bash_profile"
 alias sync="rsync -azP --del --exclude-from .deployignore"
