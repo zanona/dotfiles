@@ -122,8 +122,9 @@ autocmd       InsertEnter             *        call <SID>OnInsertModeEnter()
 autocmd       InsertLeave,WinLeave    *        call <SID>OnInsertModeLeave()
 autocmd  User GoyoEnter                        call <SID>OnGoyoEnter()
 autocmd  User GoyoLeave                        call <SID>OnGoyoLeave()
-autocmd       BufNewFile,BufReadPost  *.html     set  filetype=html.javascript.less
-autocmd       BufNewFile,BufReadPost  *.md     set  filetype=markdown
+autocmd       BufNewFile,BufReadPost  *.html     set filetype=html.javascript.less
+autocmd       BufNewFile,BufReadPost  *.md       set filetype=markdown
+autocmd       BufNEwFile,BufReadPost  Makefile   set nolist
 " autocmd       VimEnter                * Goyo
 autocmd       VimEnter                * call <SID>GoMinimal()
 " autocmd       VimLeave                * silent !tmux set status on
