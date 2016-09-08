@@ -30,6 +30,9 @@ alias update="source ~/.bash_profile"
 alias sync="rsync -azP --del --exclude-from .deployignore"
 alias server="browser-sync start --server --startPath build"
 
+# Sets terminal title
+title() { echo -ne "\033]0;${1}\007"; }
+
 transfer() {
     # write to output to tmpfile because of progress bar
     tmpfile=$( mktemp -t transferXXX );
@@ -101,11 +104,11 @@ smoothing() {
 
 #show git branch on prompt
 parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
 }
 
 proml() {
-  PS1="${TITLEBAR}\$(parse_git_branch)\\\$ "
+  PS1="${TITLEBAR}\[\e[2m\]\$(parse_git_branch)\[\e[0m\] ⚡︎ "
   PS2='> '
   PS4='+ '
 }
