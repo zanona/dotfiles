@@ -104,13 +104,18 @@ smoothing() {
 
 #show git branch on prompt
 parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1:/'
 }
 
 proml() {
-  PS1="${TITLEBAR}\[\e[2m\]\$(parse_git_branch)\[\e[0m\] ⚡︎ "
-  PS2='> '
-  PS4='+ '
+  #about prompts goo.gl/6tMCDn
+  #for getting utf-8 hex user `echo ⚡︎ | hexdump -C`
+  #about special chars on prompt goo.gl/eVAypu
+  #ICON='⚡︎'
+  ICON=$'\[\xE2\x9A\xA1\xEF\xB8\x8E\]'
+  BRANCH=$"\$(parse_git_branch)"
+  PS1="  ${ICON} ${BRANCH} "
+  PS2='    -> '
 }
 
 main() {

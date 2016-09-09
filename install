@@ -3,6 +3,8 @@ main() {
     clonePath=$("pwd")
 
     ln -sf "$clonePath/.bash_profile" "$HOME/.bash_profile"
+    # prevent last login message (goo.gl/nIHUaa)
+    ln -sf "$clonePath/.hushlogin" "$HOME/.hushlogin"
     ln -sf "$clonePath/.eslintrc.yaml" "$HOME/.eslintrc.yaml"
     ln -sf "$clonePath/.gitignore" "$HOME/.gitignore"
     ln -sf "$clonePath/.gitconfig" "$HOME/.gitconfig"
@@ -18,6 +20,9 @@ main() {
     # disable smart quotes globally
     # defaults write 'Apple GLobal Domain' NSAutomaticQuoteSubstitutionEnabled 0
 
+    # disable terminal 'Marks' feature (goo.gl/HJEodP)
+    # or simply hide it through menu > view> hide marks
+    # defaults write com.apple.Terminal AutoMarkPromptLines -int 0
     echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
 }
 
