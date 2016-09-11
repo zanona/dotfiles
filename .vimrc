@@ -175,9 +175,9 @@ function! s:OnGoyoEnter()
   set noshowmode
   set noshowcmd
   set scrolloff=999               " Always leave cursor in the middle
-  if exists('$TMUX')
-    silent !tmux set status off
-  endif
+  "if exists('$TMUX')
+  "  silent !tmux set status off
+  "endif
 endfunction
 
 function! s:OnGoyoLeave()
@@ -193,7 +193,7 @@ function! s:GoMinimal()
   set nonu
   set scrolloff=999
   set laststatus=0
-  if exists('$TMUX')
-    silent !tmux set status off
-  endif
+  "if exists('$TMUX')
+  "  silent !tmux set status off
+  "endif
 endfunction
