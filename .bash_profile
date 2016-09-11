@@ -58,21 +58,8 @@ ip() {
     curl "ipinfo.io/$1"
 }
 
-getip() {
-    #getting local ip address
-    while read -r line
-    do
-      case "$line" in
-       "inet "* )
-            line="${line/inet /}"
-            line="${line%% *}"
-            if [[ ! $line =~ ^(127|172) ]] ;then
-                export IP="$line"
-                echo "IP: $IP"
-            fi
-            ;;
-      esac
-    done < <(ifconfig)
+iplocal() {
+    ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
 }
 port() {
     lsof -wni tcp:"$1";
