@@ -14,8 +14,9 @@ exports() {
     export HEROKU_PATH="/usr/local/heroku/bin"
     # export GOPATH="$HOME/Desktop/go"
     # export NODE_PATH="$BACKUP_PATH/lib/node_modules"
+    export LOCAL_BIN="$HOME/.bin"
     export LOCAL_NODE_PATH="./node_modules/.bin"
-    export PATH="/bin:/usr/local/bin:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$PATH"
+    export PATH="/bin:/usr/local/bin:$LOCAL_BIN:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$PATH"
     export EDITOR="vi -w"
     export TERM="xterm-256color"
     export CLICOLOR=1
@@ -100,7 +101,7 @@ proml() {
   #about special chars on prompt goo.gl/eVAypu
   #ICON='⚡︎'
   ICON=$'\[\xE2\x9A\xA1\xEF\xB8\x8E\]'
-  BRANCH=$"\$(parse_git_branch)"
+  BRANCH=$"\[\$(parse_git_branch)\]"
   PS1="  ${ICON} ${BRANCH} "
   PS2='    -> '
 }

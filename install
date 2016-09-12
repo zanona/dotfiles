@@ -11,6 +11,7 @@ main() {
     ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
     ln -sf "$clonePath/.vimrc" "$HOME/.vimrc"
     ln -sf "$clonePath/.vim" "$HOME"
+    ln -sf "$clonePath/.bin" "$HOME/.bin"
     ln -sf "$clonePath/.ssh" "$HOME"
 
     sh keybindings.sh
