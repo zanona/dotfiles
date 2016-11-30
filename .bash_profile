@@ -93,6 +93,11 @@ smoothing() {
 #show git branch on prompt
 parse_git_branch() {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1:/'
+
+git_completion() {
+  credentials="$(find ~/.git-completion.sh)"
+  # shellcheck source=/Users/zanona/.git-completion.sh
+  source "$credentials"
 }
 
 proml() {
@@ -110,5 +115,6 @@ main() {
     exports
     # aliases
     proml
+    git_completion
 }
 main

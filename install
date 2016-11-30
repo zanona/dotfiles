@@ -9,6 +9,7 @@ main() {
     ln -sf "$clonePath/.gitignore" "$HOME/.gitignore"
     ln -sf "$clonePath/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
+    ln -sf "$clonePath/.git-completion.sh" "$HOME/.git-completion.sh"
     ln -sf "$clonePath/.vimrc" "$HOME/.vimrc"
     ln -sf "$clonePath/.vim" "$HOME"
     ln -sf "$clonePath/.bin" "$HOME/.bin"
