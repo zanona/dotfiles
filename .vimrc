@@ -91,10 +91,10 @@ let g:user_emmet_settings = {
 \    },
 \    'expandos': {
 \      'desc': 'meta[name=description content=${1}]',
-\      'import': 'link[rel=import]',
 \      'x-if':  'template[is=x-if][has=${1}]',
 \      'x-for': 'template[is=x-for][items=${1}]',
-\      'mod': "(template>style)+script{${newline}  module.exports = class extends WebComponent {${newline}  };${newline}}",
+\      'import': 'module-import[href=${1}][as=${2}]',
+\      'mod': "(template>style[type=text/less])+script{${newline}  module.exports = class extends WebComponent {${newline}  };${newline}}",
 \      'label': 'label>span|input',
 \      'select': 'select>option*2',
 \    }
