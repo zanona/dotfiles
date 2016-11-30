@@ -72,6 +72,9 @@ let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
 "Igrore Web-Components related errors
 let g:syntastic_html_tidy_ignore_errors = [
 \ "<template> proprietary attribute",
+\ "missing </template> before",
+\ "before <option>",
+\ "option> isn't allowed",
 \ "proprietary attribute \"async\"",
 \ "proprietary attribute \"is\"",
 \ "is not recognized!",
