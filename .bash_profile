@@ -16,7 +16,9 @@ exports() {
     # export NODE_PATH="$BACKUP_PATH/lib/node_modules"
     export LOCAL_BIN="$HOME/.bin"
     export LOCAL_NODE_PATH="./node_modules/.bin"
-    export PATH="/bin:/usr/local/bin:$LOCAL_BIN:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$PATH"
+    export LOCAL_YARN_PATH
+    LOCAL_YARN_PATH=$(yarn global bin)
+    export PATH="/bin:/usr/local/bin:$LOCAL_BIN:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$LOCAL_YARN_PATH:$PATH"
     export EDITOR="vi -w"
     export TERM="xterm-256color"
     export CLICOLOR=1
@@ -92,7 +94,8 @@ smoothing() {
 
 #show git branch on prompt
 parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ \1:/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1:/'
+}
 
 git_completion() {
   credentials="$(find ~/.git-completion.sh)"
@@ -105,8 +108,9 @@ proml() {
   #for getting utf-8 hex user `echo ⚡︎ | hexdump -C`
   #about special chars on prompt goo.gl/eVAypu
   #ICON='⚡︎'
-  ICON=$'\[\xE2\x9A\xA1\xEF\xB8\x8E\]'
-  BRANCH=$"\[\$(parse_git_branch)\]"
+  ICON=$'\\[\xE2\\]\\[\x9A\\]\\[\xA1\\]\\[\xEF\\]\\[\xB8\\]\\[\x8E\\]'
+  if [[ $MYVIMRC ]]; then ICON=⚑; fi;
+  BRANCH="\$(parse_git_branch)"
   PS1="  ${ICON} ${BRANCH} "
   PS2='    -> '
 }
