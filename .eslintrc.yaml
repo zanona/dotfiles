@@ -34,7 +34,7 @@ rules:
     - 1
     - args: after-used # allow (err, resp) if resp is used
       argsIgnorePattern: ^_ # allow skippling _ or _name
-  no-use-before-define: 1
+  no-use-before-define: 0
   no-delete-var: 1 # prevent deletion of vars
   no-catch-shadow: 1 # prevent renaming catch err
   no-shadow-restricted-names: 2 #prevent reserved names
