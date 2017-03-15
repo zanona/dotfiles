@@ -43,6 +43,7 @@ set list                          " Show invisible marked chars
 set nowrap                        " Prevet line-wrapping by default
 set colorcolumn=80                " Show column for 80 chars
 set clipboard=unnamed             " Reset clipboard to work with tmux on OSX Sierra (goo.gl/KjXTkP)
+set shell=bash\ -l                " Keep same Shell profile when running sh or ! (goo.gl/itWE3c)
 
 " Plugin-specific settings
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
