@@ -12,6 +12,9 @@ defaults write -g NSUserKeyEquivalents '{
   "Start Speaking" = "~@s";
 }'
 
+defaults write -app Terminal NSUserKeyEquivalents '{
+  "Return to Default Size" = "@0";
+}'
 defaults write -app Safari NSUserKeyEquivalents '{
   "Disable Styles" = "^~@i";
   "Disable JavaScript" = "^~@o";
