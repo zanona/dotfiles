@@ -16,3 +16,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[alias]
+	lcommit = -zco user.name=\"Z&Co\" -c user.email=\"hi@zanona.co\" commit --reset-author
