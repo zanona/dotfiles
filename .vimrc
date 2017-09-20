@@ -91,6 +91,7 @@ let g:user_emmet_settings = {
 \      'select': {},
 \    },
 \    'expandos': {
+\      'ph': 'img[src=//placehold.it/${1}]',
 \      'desc': 'meta[name=description content=${1}]',
 \      'x-if':  'template[is=x-if][has=${1}]',
 \      'x-for': 'template[is=x-for][items=${1}]',
