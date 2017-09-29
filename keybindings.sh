@@ -22,6 +22,9 @@ defaults write -app Safari NSUserKeyEquivalents '{
   "Show Previous Tab" = "~@\Uf702";
   "Messages" = "~@p";
 }'
+defaults write -app 'Google Chrome' NSUserKeyEquivalents '{
+  "Pin Tab" = "^~@p";
+}'
 defaults write -app Preview NSUserKeyEquivalents '{
   "Adjust Size…" = "~@i";
 }'
