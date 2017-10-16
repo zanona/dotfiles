@@ -108,8 +108,9 @@ proml() {
   #for getting utf-8 hex user `echo ⚡︎ | hexdump -C`
   #about special chars on prompt goo.gl/eVAypu
   #ICON='⚡︎'
-  ICON=$'\\[\xE2\\]\\[\x9A\\]\\[\xA1\\]\\[\xEF\\]\\[\xB8\\]\\[\x8E\\]'
-  if [[ $MYVIMRC ]]; then ICON=⚑; fi;
+  ICON='$'
+  #ICON=$'\\[\xE2\\]\\[\x9A\\]\\[\xA1\\]\\[\xEF\\]\\[\xB8\\]\\[\x8E\\]'
+  if [[ $MYVIMRC ]]; then ICON='>>'; fi;
   BRANCH="\$(parse_git_branch)"
   PS1="  ${ICON} ${BRANCH} "
   PS2='    -> '
