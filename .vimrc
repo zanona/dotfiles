@@ -129,6 +129,7 @@ autocmd       InsertLeave,WinLeave    *        call <SID>OnInsertModeLeave()
 autocmd  User GoyoEnter                        call <SID>OnGoyoEnter()
 autocmd  User GoyoLeave                        call <SID>OnGoyoLeave()
 autocmd       BufNewFile,BufReadPost  *.html     set filetype=html.javascript.less
+autocmd       BufNewFile,BufReadPost  *.map      set filetype=json
 autocmd       BufNewFile,BufReadPost  *.md       set filetype=markdown
 autocmd       BufNEwFile,BufReadPost  Makefile   set nolist
 " autocmd       VimEnter                * Goyo
