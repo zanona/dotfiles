@@ -62,7 +62,7 @@ let g:syntastic_aggregate_errors = 1 "Show all linter errors
 let g:syntastic_vim_checkers        = ['vimlint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_checkers       = ['tidy']
-let g:syntastic_less_checkers       = ['lessc']
+let g:syntastic_less_checkers       = ['lessc', 'stylelint']
 let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
 
 let g:syntastic_less_options        = ['--html']

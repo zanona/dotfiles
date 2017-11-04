@@ -6,6 +6,7 @@ main() {
     # prevent last login message (goo.gl/nIHUaa)
     ln -sf "$clonePath/.hushlogin" "$HOME/.hushlogin"
     ln -sf "$clonePath/.eslintrc.yaml" "$HOME/.eslintrc.yaml"
+    ln -sf "$clonePath/.stylelintrc.yaml" "$HOME/.stylelintrc.yaml"
     ln -sf "$clonePath/.gitignore" "$HOME/.gitignore"
     ln -sf "$clonePath/.gitconfig" "$HOME/.gitconfig"
     ln -sf "$clonePath/.tmux.conf" "$HOME/.tmux.conf"
