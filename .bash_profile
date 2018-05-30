@@ -7,8 +7,8 @@ HISTCONTROL=ignoreboth:erasedups #prevent repeated items in history
 
 exports() {
   # ls -la ~/.ssh/credentials.sh | awk '{ print $9 }'
-  credentials="$(find ~/.ssh/credentials.sh)"
-  # shellcheck source=/Users/zanona/.ssh/credentials.sh
+  credentials="$(find ~/.ssh/.env)"
+  # shellcheck source=/Users/zanona/.ssh/.env
   source "$credentials"
     export PYTHONPATH="/usr/local/bin/python:/usr/local/share/python"
     export HEROKU_PATH="/usr/local/heroku/bin"
@@ -66,6 +66,9 @@ iplocal() {
 }
 port() {
     lsof -wni tcp:"$1";
+}
+setenv() {
+  export $(cat $1 | xargs)
 }
 
 
