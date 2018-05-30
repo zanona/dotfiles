@@ -48,39 +48,10 @@ set shell=bash\ -l                " Keep same Shell profile when running sh or !
 " Plugin-specific settings
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
 
-" Install tidy `brew install tidy-html5`
-" let g:syntastic_always_populate_loc_list = 1
+" Ale <https://github.com/w0rp/ale>
+let g:ale_linters = {'javascript': ['xo']}
+let g:ale_less_lessc_options = '--html'
 
-"Allow syntanstic to run eslint-plugin-html on html files
-"npm i eslint-plugin-html -g
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-let g:syntastic_aggregate_errors = 1 "Show all linter errors
-
-let g:syntastic_vim_checkers        = ['vimlint']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_html_checkers       = ['tidy']
-let g:syntastic_less_checkers       = ['lessc', 'stylelint']
-let g:syntastic_yaml_checkers       = ['jsyaml', 'ajsl']
-
-let g:syntastic_less_options        = ['--html']
-let g:syntastic_sh_shellcheck_args  = '-x'
-let g:syntastic_html_tidy_args      = '--drop-empty-elements no'
-
-
-"Igrore Web-Components related errors
-let g:syntastic_html_tidy_ignore_errors = [
-\ "<template> proprietary attribute",
-\ "missing </template> before",
-\ "before <option>",
-\ "option> isn't allowed",
-\ "proprietary attribute \"async\"",
-\ "proprietary attribute \"is\"",
-\ "is not recognized!",
-\ "discarding unexpected"
-\ ]
 "Extend Emmet functionality
 let g:user_emmet_settings = {
 \  'html': {
@@ -121,25 +92,30 @@ noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
 
+" Map quick show prev and next errors to ctrl+K and ctrl+J
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+
 " AUTO COMMANDS
 " ==============================================================================
 
-autocmd       InsertEnter             *        call <SID>OnInsertModeEnter()
-autocmd       InsertLeave,WinLeave    *        call <SID>OnInsertModeLeave()
-autocmd  User GoyoEnter                        call <SID>OnGoyoEnter()
-autocmd  User GoyoLeave                        call <SID>OnGoyoLeave()
-autocmd       BufNewFile,BufReadPost  *.html     set filetype=html.javascript.less
+autocmd       InsertEnter             *          call <SID>OnInsertModeEnter()
+autocmd       InsertLeave,WinLeave    *          call <SID>OnInsertModeLeave()
+autocmd       User GoyoEnter                     call <SID>OnGoyoEnter()
+autocmd       User GoyoLeave                     call <SID>OnGoyoLeave()
+
+" autocmd       BufNewFile,BufReadPost  *.html     set filetype=html.javascript.less
+" autocmd       BufNewFile,BufReadPost  *.html     set filetype=html.javascript
 autocmd       BufNewFile,BufReadPost  *.map      set filetype=json
 autocmd       BufNewFile,BufReadPost  *.md       set filetype=markdown
+
 autocmd       BufNEwFile,BufReadPost  Makefile   set nolist
 " autocmd       VimEnter                * Goyo
 autocmd       VimEnter                * call <SID>GoMinimal()
 " autocmd       VimLeave                * silent !tmux set status on
 autocmd       BufEnter                * let &titlestring = @%
 "Set terminal title to relative file path
-
-" enable swagger syntax checker only for swagger.yaml files
-" autocmd BufRead swagger.yaml let g:syntastic_yaml_checkers = ['jsyaml', 'swagger']
 
 " disable syntax highlighting for large files
 autocmd BufWinEnter * call CheckBigFile()
