@@ -67,6 +67,9 @@ iplocal() {
 port() {
     lsof -wni tcp:"$1";
 }
+search() {
+  grep -r --exclude-dir=node_modules --exclude=yarn.lock --exclude=*.swp --exclude=build/* "$1" ${2:-*}
+}
 setenv() {
   export $(cat $1 | xargs)
 }
