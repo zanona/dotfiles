@@ -16,17 +16,22 @@ main() {
     ln -sf "$clonePath/.bin" "$HOME/.bin"
     ln -sf "$clonePath/.ssh" "$HOME"
 
-    sh keybindings.sh
+    # https://stackoverflow.com/a/43618657/165750
+    if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+      echo "need to copy wsl.conf to /etc, asking permission"
+      sudo cp "$clonePath/wsl.conf" "/etc"
+    else
+      sh keybindings.sh
 
-    # disable smart dashes globally
-    defaults write 'Apple Global Domain' NSAutomaticDashSubstitutionEnabled 0
-    # disable smart quotes globally
-    # defaults write 'Apple GLobal Domain' NSAutomaticQuoteSubstitutionEnabled 0
-
-    # disable terminal 'Marks' feature (goo.gl/HJEodP)
-    # or simply hide it through menu > view> hide marks
-    # defaults write com.apple.Terminal AutoMarkPromptLines -int 0
-    echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
+      # disable smart dashes globally
+      defaults write 'Apple Global Domain' NSAutomaticDashSubstitutionEnabled 0
+      # disable smart quotes globally
+      defaults write 'Apple GLobal Domain' NSAutomaticQuoteSubstitutionEnabled 0
+      # disable terminal 'Marks' feature (goo.gl/HJEodP)
+      # or simply hide it through menu > view> hide marks
+      # defaults write com.apple.Terminal AutoMarkPromptLines -int 0
+      echo "Now open OSX Terminal preferences and import base16-ocean.dark.terminal"
+    fi
 }
 
 main;

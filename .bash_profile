@@ -73,30 +73,44 @@ search() {
 setenv() {
   export $(cat $1 | xargs)
 }
-
-
-#add MacOSX dock separator
-add_dock_spacer() {
-    defaults write com.apple.dock persistent-apps -array-add '{ "tile-type" = "spacer-tile"; }'
-    killall Dock
+perms() {
+  stat -c "%a %n" *
 }
 
-# Show/Hide invisible files
-function hideFiles() {
-    defaults write com.apple.finder AppleShowAllFiles -bool NO
-    killall Finder
-}
-function showFiles() {
-    defaults write com.apple.finder AppleShowAllFiles -bool YES
-    killall Finder
-}
 
-# Set font anti-aliasing
-smoothing() {
-    # $1 font-smoothing level
-    # 1 => light, 2 => medium, 3 => strong (usually 1 is fine)
-    defaults -currentHost write -globalDomain AppleFontSmoothing -int "$1" && killall Finder
-}
+# Only run on WSL
+if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+  open() {
+    explorer.exe .
+  }
+  chrome() {
+    /mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe $1
+  }
+  browse() {
+    chrome https://github.com/$(git remote get-url origin | cut -d ':' -f 2)
+  }
+else
+  #add MacOSX dock separator
+  add_dock_spacer() {
+      defaults write com.apple.dock persistent-apps -array-add '{ "tile-type" = "spacer-tile"; }'
+      killall Dock
+  }
+  # Show/Hide invisible files
+  function hideFiles() {
+      defaults write com.apple.finder AppleShowAllFiles -bool NO
+      killall Finder
+  }
+  function showFiles() {
+      defaults write com.apple.finder AppleShowAllFiles -bool YES
+      killall Finder
+  }
+  # Set font anti-aliasing
+  smoothing() {
+      # $1 font-smoothing level
+      # 1 => light, 2 => medium, 3 => strong (usually 1 is fine)
+      defaults -currentHost write -globalDomain AppleFontSmoothing -int "$1" && killall Finder
+  }
+fi
 
 #show git branch on prompt
 parse_git_branch() {
