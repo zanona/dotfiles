@@ -83,11 +83,9 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   open() {
     explorer.exe .
   }
-  chrome() {
-    /mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe $1
-  }
   browse() {
-    chrome https://github.com/$(git remote get-url origin | cut -d ':' -f 2)
+    # https://superuser.com/a/1182349/102590
+    cmd.exe /c start "" https://github.com/$(git remote get-url origin | cut -d ':' -f 2)
   }
 else
   #add MacOSX dock separator
