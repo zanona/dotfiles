@@ -7,7 +7,7 @@ autocmd!
 execute     pathogen#infect()
 filetype    plugin indent on      " Turn on file type detection.
 syntax      on                    " Turn on syntax highlighting.
-colorscheme base16-ocean          " Set colour scheme
+" colorscheme base16-ocean          " Set colour scheme
 
 set background=dark               " Ajudst background color to dark
 set showcmd                       " Display incomplete commands.
