@@ -18,5 +18,7 @@
 	required = true
 [alias]
 	lcommit = -zco user.name=\"Z&Co\" -c user.email=\"hi@zanona.co\" commit --reset-author
+  include = update-index --no-assume-unchanged
+  skip = update-index  --assume-unchanged
 [merge]
 	tool = vimdiff
