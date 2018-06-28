@@ -24,6 +24,10 @@ exports() {
     export CLICOLOR=1
     export LSCOLORS="bxfxcxdxbxegedabagacad"
     # more at http://it.toolbox.com/blogs/lim/how-to-fix-colors-on-mac-osx-terminal-37214
+
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 }
 
 alias vi="vim"
