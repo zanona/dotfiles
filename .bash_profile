@@ -1,41 +1,39 @@
 #!/bin/bash
 HISTCONTROL=ignoreboth:erasedups #prevent repeated items in history
 
-# Base16 Shell
-# BASE16_SHELL="$HOME/.config/base16-shell/base16-ocean.dark.sh"
-# [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
-
 exports() {
   # ls -la ~/.ssh/credentials.sh | awk '{ print $9 }'
   credentials="$(find ~/.ssh/.env)"
   # shellcheck source=/Users/zanona/.ssh/.env
   source "$credentials"
-    export PYTHONPATH="/usr/local/bin/python:/usr/local/share/python"
-    export HEROKU_PATH="/usr/local/heroku/bin"
-    # export GOPATH="$HOME/Desktop/go"
-    # export NODE_PATH="$BACKUP_PATH/lib/node_modules"
-    export LOCAL_BIN="$HOME/.bin"
-    export LOCAL_NODE_PATH="./node_modules/.bin"
-    export LOCAL_YARN_PATH
-    LOCAL_YARN_PATH=$(yarn global bin)
-    export PATH="/bin:/usr/local/bin:$LOCAL_BIN:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$LOCAL_YARN_PATH:$PATH"
-    export EDITOR="vi -w"
-    export TERM="xterm-256color"
-    export CLICOLOR=1
-    export LSCOLORS="bxfxcxdxbxegedabagacad"
-    # more at http://it.toolbox.com/blogs/lim/how-to-fix-colors-on-mac-osx-terminal-37214
 
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  export PYTHONPATH="/usr/local/bin/python:/usr/local/share/python"
+  # export HEROKU_PATH="/usr/local/heroku/bin"
+  # export GOPATH="$HOME/Desktop/go"
+  # export NODE_PATH="$BACKUP_PATH/lib/node_modules"
+  export LOCAL_BIN="$HOME/.bin"
+  export LOCAL_NODE_PATH="./node_modules/.bin"
+  export LOCAL_YARN_PATH
+  export NVM_DIR="$HOME/.nvm"
+  export PATH="/bin:/usr/local/bin:$LOCAL_BIN:$HEROKU_PATH:$GOPATH:$LOCAL_NODE_PATH:$LOCAL_YARN_PATH:$PATH"
+  export EDITOR="vi -w"
+  export TERM="xterm-256color"
+  export CLICOLOR=1
+  export LSCOLORS="bxfxcxdxbxegedabagacad"
+  # more at http://it.toolbox.com/blogs/lim/how-to-fix-colors-on-mac-osx-terminal-37214
+
+  # use v1 auth for webtask.io (v2 is currently incompatible with older accounts)
+  # this will make `wt edit` work as expected
+  export AUTH_MODE="v1"
+
 }
 
 alias vi="vim"
 alias redis="redis-server"
 alias tarz="tar -zcvf archive.tar.gz"
+alias untarz="tar -xvzf"
 alias update="source ~/.bash_profile"
 alias sync="rsync -azP --del --exclude-from .deployignore"
-alias server="browser-sync start --server --startPath build"
 
 # Sets terminal title
 title() { echo -ne "\033]0;${1}\007"; }
@@ -47,14 +45,6 @@ transfer() {
     pbcopy < "$tmpfile";
     echo "Great Success! URL copied to clipboard ($(cat "$tmpfile"))"
     rm -f "$tmpfile";
-}
-
-debian() {
-    local prevPwd
-    prevPwd=$(pwd);
-    cd ~/Development/vagrant/debian || exit
-    vagrant "$1"
-    cd "$prevPwd" || exit
 }
 
 ns() {
@@ -84,6 +74,7 @@ perms() {
 
 # Only run on WSL
 if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+  export BROWSER="explorer.exe"
   open() {
     explorer.exe .
   }
@@ -144,4 +135,18 @@ main() {
     proml
     git_completion
 }
+
+nvm_load() {
+  # NVM starting too slow
+  # https://github.com/creationix/nvm/issues/782#issuecomment-387818200
+  echo 'Using nvm for the first time, setting up';
+  . $NVM_DIR/nvm.sh && . $NVM_DIR/bash_completion;
+  export PATH="$PATH:$(yarn global bin)"
+}
+alias node='unalias node; unalias npm; unalias yarn; nvm_load; node $@'
+alias npm='unalias node; unalias npm; unalias yarn; nvm_load; npm $@'
+alias yarn='unalias node; unalias npm; unalias yarn; nvm_load; yarn $@'
+
+
+source ~/.bashrc
 main
