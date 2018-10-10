@@ -46,6 +46,9 @@ set clipboard=unnamed             " Reset clipboard to work with tmux on OSX Sie
 set shell=bash\ -l                " Keep same Shell profile when running sh or ! (goo.gl/itWE3c)
 set modeline                      " Use modeline if existent
 
+
+highlight ColorColumn ctermbg=240 "Change colorColumn background to lightgray
+
 " Plugin-specific settings
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
 
