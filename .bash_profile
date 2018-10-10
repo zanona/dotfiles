@@ -82,6 +82,7 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
     # https://superuser.com/a/1182349/102590
     cmd.exe /c start "" https://github.com/$(git remote get-url origin | cut -d ':' -f 2)
   }
+  alias pbcopy="clip.exe"
 else
   #add MacOSX dock separator
   add_dock_spacer() {
@@ -136,17 +137,22 @@ main() {
     git_completion
 }
 
-nvm_load() {
-  # NVM starting too slow
-  # https://github.com/creationix/nvm/issues/782#issuecomment-387818200
-  echo 'Using nvm for the first time, setting up';
-  . $NVM_DIR/nvm.sh && . $NVM_DIR/bash_completion;
-  export PATH="$PATH:$(yarn global bin)"
-}
-alias node='unalias node; unalias npm; unalias yarn; nvm_load; node $@'
-alias npm='unalias node; unalias npm; unalias yarn; nvm_load; npm $@'
-alias yarn='unalias node; unalias npm; unalias yarn; nvm_load; yarn $@'
+#nvm_load() {
+#  # NVM starting too slow
+#  # https://github.com/creationix/nvm/issues/782#issuecomment-387818200
+#  echo 'Using nvm for the first time, setting up';
+#  . $NVM_DIR/nvm.sh && . $NVM_DIR/bash_completion;
+#  export PATH="$PATH:$(yarn global bin)"
+#}
+#
+#alias nvm='unalias nvm; nvm_load; node $@'
+#alias node='unalias node; unalias npm; unalias yarn; nvm_load; node $@'
+#alias npm='unalias node; unalias npm; unalias yarn; nvm_load; npm $@'
+#alias yarn='unalias node; unalias npm; unalias yarn; nvm_load; yarn $@'
 
 
 source ~/.bashrc
 main
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
+
