@@ -1,24 +1,25 @@
 [user]
-	name = Marcus Zanona
-	email = marcus@zanona.co
+  name = Marcus Zanona
+  email = marcus@zanona.co
 [mergetool]
-	keepBackup = false
+  keepBackup = false
 [core]
   editor = vim
-	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [difftool]
-	prompt = false
+  prompt = false
 [push]
-	default = simple
+  default = simple
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
 [alias]
-	lcommit = -zco user.name=\"Z&Co\" -c user.email=\"hi@zanona.co\" commit --reset-author
+  fpush = !git add --all && git commit --amend --no-edit && git push -f
+  lcommit = -zco user.name=\"Z&Co\" -c user.email=\"hi@zanona.co\" commit --reset-author
   include = update-index --no-assume-unchanged
   skip = update-index  --assume-unchanged
 [merge]
-	tool = vimdiff
+  tool = vimdiff
