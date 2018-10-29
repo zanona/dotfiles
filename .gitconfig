@@ -21,5 +21,8 @@
   lcommit = -zco user.name=\"Z&Co\" -c user.email=\"hi@zanona.co\" commit --reset-author
   include = update-index --no-assume-unchanged
   skip = update-index  --assume-unchanged
+  size = count-objects -vH
+  compress = !git reflog expire --all --expire=now && git gc --prune=now --aggressive && git size
+  clone-latest = "!git clone --depth=1 git@github.com:$1.git #"
 [merge]
   tool = vimdiff
