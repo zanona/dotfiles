@@ -1,9 +1,9 @@
 setlocal tabstop=4
 setlocal shiftwidth=4
-set noexpandtab
+setlocal noexpandtab
 set listchars=nbsp:☠,tab:\ \ 
-set foldtext=MyJSFoldText()         " Customise folded blocks presentation
-set fillchars="fold:@@@"           " Fill empty folding chars with spaces
+setlocal foldtext=MyJSFoldText()         " Customise folded blocks presentation
+setlocal fillchars="fold:@@@"           " Fill empty folding chars with spaces
 
 function! MyJSFoldText()
     let linestart = substitute(getline(v:foldstart),"^@@\t","",1)
