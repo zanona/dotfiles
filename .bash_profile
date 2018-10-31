@@ -68,7 +68,7 @@ setenv() {
   export $(cat $1 | xargs)
 }
 perms() {
-  stat -c "%a %n" *
+  stat -c "%a %n" ${1:-./}*
 }
 
 
