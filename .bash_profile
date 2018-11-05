@@ -80,7 +80,9 @@ if grep -qE "(Microsoft|WSL)" /proc/version &> /dev/null ; then
   }
   browse() {
     # https://superuser.com/a/1182349/102590
-    cmd.exe /c start "" https://github.com/$(git remote get-url origin | cut -d ':' -f 2)
+    local repo=$(git remote get-url origin | cut -d ':' -f 2 | sed 's/.git//');
+    local branch=$(git branch | grep \* | cut -d ' ' -f2);
+    cmd.exe /c start "" https://github.com/$repo/tree/$branch;
   }
   alias pbcopy="clip.exe"
 else
