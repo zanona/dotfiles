@@ -53,7 +53,7 @@ highlight ColorColumn ctermbg=240 "Change colorColumn background to lightgray
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
 
 " Ale <https://github.com/w0rp/ale>
-let g:ale_linters = {'javascript': ['xo']}
+let g:ale_linters = {'javascript': ['xo'], 'typescript': ['tsserver']}
 let g:ale_less_lessc_options = '--html'
 
 "Extend Emmet functionality
