@@ -24,5 +24,6 @@
   size = count-objects -vH
   compress = !git reflog expire --all --expire=now && git gc --prune=now --aggressive && git size
   clone-latest = "!cd -- ${GIT_PREFIX:-.}; git clone --depth=1 git@github.com:$1.git #"
+  merge-branches = "!git branch -l | grep $1 | xargs git merge #"
 [merge]
   tool = vimdiff
