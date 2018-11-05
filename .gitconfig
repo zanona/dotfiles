@@ -17,12 +17,12 @@
   smudge = git-lfs smudge %f
   required = true
 [alias]
-  fpush = !git add --all && git commit --amend --no-edit && git push -f
+  fpush = !git add --all && git commit --amend --no-edit --no-verify && git push -f
   lcommit = -zco user.name=\"Z&Co\" -c user.email=\"hi@zanona.co\" commit --reset-author
   include = update-index --no-assume-unchanged
   skip = update-index  --assume-unchanged
   size = count-objects -vH
   compress = !git reflog expire --all --expire=now && git gc --prune=now --aggressive && git size
-  clone-latest = "!git clone --depth=1 git@github.com:$1.git #"
+  clone-latest = "!cd -- ${GIT_PREFIX:-.}; git clone --depth=1 git@github.com:$1.git #"
 [merge]
   tool = vimdiff
