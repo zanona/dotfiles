@@ -158,3 +158,5 @@ main
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
 
+# open tmux on start up
+if [ $SHLVL -lt 3 ]; then tmux && exit 0; fi
