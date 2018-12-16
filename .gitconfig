@@ -29,5 +29,6 @@
   last-commit = "!git branch -r --sort=-committerdate | grep $1 | xargs -n1 git log -1 --decorate --oneline | grep -v 'skip ci' #"
   check-conflicts = "!git branch -r --sort=-committerdate | grep $1 | xargs -I % sh -c 'git diff --check > /dev/null % && echo [OK] % || echo [CONFLICT] %' #"
   merge-branches = "!git branch -r --sort=-committerdate | grep $1 | grep -v ${2:-__} | xargs git merge #"
+  tree = "!tree -a --dirsfirst -I \"$(cat .gitignore | tr '\n' '|').git\""
 [merge]
   tool = vimdiff
