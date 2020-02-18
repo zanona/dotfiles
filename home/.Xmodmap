@@ -1,0 +1,24 @@
+! Allow translating arrow keys into caps lock + vim keys
+! use caps lock as additional modifier
+!clear Lock
+!keycode 66  = Mode_switch
+
+! white keyboard
+keycode 32 = o O BackSpace
+keycode 43 = h H Left
+keycode 44 = j J Down
+keycode 45 = k K Up
+keycode 46 = l L Right
+keycode 57 = n N Return
+
+! raspberry pi keyboard
+keycode 83 = Escape
+keycode 84 = Up
+keycode 85 = BackSpace
+keycode 87 = Left
+keycode 88 = Down
+keycode 89 = Right
+keycode 90 = Return
+keycode 91 = BackSpace
+
+

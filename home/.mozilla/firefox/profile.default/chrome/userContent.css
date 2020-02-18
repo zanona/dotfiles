@@ -1,0 +1,11 @@
+@-moz-document domain(duckduckgo.com) {
+    html,
+    body,
+    .site-wrapper,
+    .header-wrap,
+    .search--header,
+    .acp-wrap { background-color: black !important; }
+    .header-wrap { box-shadow: none !important; }
+    .search-filters-wrap::before,
+    .search-filters-wrap::after { content: none !important; }
+}

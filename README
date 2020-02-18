@@ -1,0 +1,16 @@
+I recommend using GNU stow for managing config files.
+
+Instructions:
+
+  $ stow -t $HOME -S home
+  $ sudo stow -t /etc  -S etc
+
+Stow will never delete any file it doesn't own so in order to replace those,
+you can either adopt (-a flag) your own into the package or remove those first.
+Exceptions are clear to inform the user of what would've happened.
+
+  $ stow -t /etc/ -S etc
+  WARNING! stowing etc would cause conflicts:
+    * existing target is neither a link nor a directory: environment
+    * existing target is neither a link nor a directory: vconsole.conf
+

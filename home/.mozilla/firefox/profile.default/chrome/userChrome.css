@@ -1,0 +1,44 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#TabsToolbar { visibility: collapse !important; }
+
+
+#nav-bar {
+  opacity: 1;
+}
+#urlbar {
+  //opacity: 0;
+}
+#urlbar:not(.megabar)[focused="true"] {
+  //opacity: 1;
+  outline: none !important;
+}
+#urlbar:not(.megabar)[focused="true"] {
+  border-width: 0 !important;
+}
+
+/*
+menupopup {
+	-moz-appearance: none !important;
+  font-size: 0.875em;
+	min-width: 280px !important;
+	padding: 8px 2px 8px 2px !important;
+	border-width: 0 !important;
+  color: #999999 !important;
+	background-color: #000000 !important;
+}
+*/
+#sidebar-box #sidebar-header { visibility: collapse; } 
+#sidebar-splitter { display: none !important; }
+
+/* apply dark background when page is about to load */
+@-moz-document url(chrome://browser/content/browser.xhtml) {
+  #main-window,
+  browser[type="content-primary"],
+  browser[type="content"],
+  tabbrowser#content,
+  #content,
+  browser[type="content"] > html {
+     background: black !important;
+  }
+}

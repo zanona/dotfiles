@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+# help from: https://stackoverflow.com/questions/2559076/
+
+get_system_packages() {
+	pacman -Qq -g base -g base-devel | sort | uniq
+}
+get_explicit_packages() {
+	pacman -Qteq | sort
+}
+
+# Explicit packages installed by the user 
+# excluding base and base-devel
+
+get_user_packages() {
+	comm -23 <(get_explicit_packages) <(get_system_packages)
+}
+
+save_packages() {
+	if [ ! -f $1 ]; then
+		echo "creating" $1
+		touch $1
+	fi
+	comm -2 <(get_user_packages) $1 > $1
+	echo $1 "updated"
+}
+
+save_packages "$HOME/.packages";
