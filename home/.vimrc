@@ -84,7 +84,7 @@ let g:goyo_width = 104
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
 
 " Ale <https://github.com/w0rp/ale>
-let g:ale_linters = {'javascript': ['xo'], 'typescript': ['tsserver']}
+let g:ale_linters = {'javascript': ['xo'], 'typescript': ['eslint','tsserver']}
 let g:ale_less_lessc_options = '--html'
 
 "Extend Emmet functionality
