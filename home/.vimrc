@@ -132,6 +132,10 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap <silent> <C-l> <Plug>(ale_detail)
 
+" Follow symlink (resolve) when opening in buffer
+" https://vim.fandom.com/wiki/Replace_a_builtin_command_using_cabbrev
+" https://stackoverflow.com/questions/30791692/make-vim-follow-symlinks-when-opening-files-from-command-line
+" cabbrev    <expr>    e    ((getcmdtype() == ':' && getcmdpos() <= 2)? 'expand("<args>")' : 'e')
 
 " AUTO COMMANDS
 " ==============================================================================
