@@ -29,6 +29,7 @@ Plug 'cespare/vim-toml'
 Plug 'ianks/vim-tsx'
 Plug 'swekaj/php-foldexpr.vim'
 Plug 'sainnhe/edge'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
