@@ -17,6 +17,9 @@ alias vi='vim'
 alias pacman-cleanup='yay -Rsn $(yay -Qtdq)'
 alias incognito='firefox --private-window'
 alias reset-keys='setxkbmap -layout us'
+alias docker-cleanup='\
+  docker rmi $(docker images -a -q) && \
+  docker rm $(docker ps -a -f status=exited -q)'
 
 PS1='\$ '
 # when in vim subshell change PS1 for clarity
