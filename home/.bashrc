@@ -20,6 +20,7 @@ alias reset-keys='setxkbmap -layout us'
 alias docker-cleanup='\
   docker rmi $(docker images -a -q) && \
   docker rm $(docker ps -a -f status=exited -q)'
+alias yay-update='yay -Syu --devel --timeupdate'
 
 PS1='\$ '
 # when in vim subshell change PS1 for clarity
