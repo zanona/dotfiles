@@ -163,7 +163,7 @@ endfunction
 function MyFoldText()
     let linestart = substitute(getline(v:foldstart),"^  ","",1)
     let lineend = substitute(getline(v:foldend),"^ *","",1)
-    return '+ ' . linestart . '...' . lineend
+    return '+' . repeat(' ', indent(v:foldstart) - 1) . trim(linestart) . '...' . trim(lineend)
 endfunction
 
 function! s:OnInsertModeLeave()
