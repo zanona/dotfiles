@@ -56,16 +56,12 @@ set title                         " Set the terminal's title
 set visualbell                    " No beeping.
 set nobackup                      " Don't backup before overwriting file.
 set nowritebackup                 " And again.
-set expandtab                     " Use spaces instead of tabs
 set smartindent                   " Auto indent new lines
-set tabstop=2                     " Use 2 spaces as default
-set shiftwidth=2                  " Enforce above
 set foldmethod=syntax             " Set default folding method to 'syntax'
 set foldtext=MyFoldText()         " Customise folded blocks presentation
 set fillchars="fold:\ "           " Fill empty folding chars with spaces
 set laststatus=0                  " Hide the status line
 set iskeyword-=_                  " Treat _ as word boundary
-set listchars=nbsp:☠,tab:▸␣       " Mark nbsp chars
 set list                          " Show invisible marked chars
 set nowrap                        " Prevet line-wrapping by default
 set colorcolumn=80                " Show column for 80 chars
@@ -147,8 +143,8 @@ autocmd! User GoyoLeave nested call <SID>GoyoLeave()
 autocmd! InsertLeave,WinLeave * call <SID>OnInsertModeLeave()
 autocmd! BufEnter * let &titlestring = @%
 autocmd! BufWinEnter nested call disable_syntax_large_files()
-" autocmd BufNewFile,BufReadPost *.map set filetype=json
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd! BufEnter * call <SID>TabAdjust(0)
+command! TabToggle call <SID>TabAdjust(1)
 
 " UTILITY METHODS
 " ==============================================================================
@@ -220,4 +216,19 @@ endfunction
 
 function! s:GoyoLeave()
   call s:ApplyTheme()
+endfunction
+
+function! s:TabAdjust(toggle)
+  if a:toggle
+    set expandtab!
+  endif
+  if &expandtab
+    set shiftwidth=2
+    set softtabstop=2
+    set listchars=nbsp:☠,tab:▸␣
+  else
+    set shiftwidth=4
+    set softtabstop=4
+    set listchars=nbsp:☠,tab:\ \ 
+  endif
 endfunction
