@@ -37,3 +37,5 @@
 	merge-branches = "!git branch -r --sort=-committerdate | grep $1 | grep -v ${2:-__} | xargs git merge #"
 [merge]
 	tool = vimdiff
+[pull]
+	rebase = true
