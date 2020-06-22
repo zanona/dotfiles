@@ -13,23 +13,28 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/goyo.vim'
+"Theme
+Plug 'sainnhe/edge'
+" Vim Tooling
 Plug 'dense-analysis/ale'
-Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/goyo.vim'
 Plug 'mattn/emmet-vim'
 Plug 'Konfekt/FastFold'
-Plug 'othree/html5.vim'
-Plug 'godlygeek/tabular'
-Plug 'leafgarland/typescript-vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+
+"File types
+Plug 'editorconfig/editorconfig-vim'
+Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'groenewege/vim-less'
 Plug 'cespare/vim-toml'
-Plug 'ianks/vim-tsx'
 Plug 'swekaj/php-foldexpr.vim'
-Plug 'sainnhe/edge'
-Plug 'tpope/vim-surround'
+
+"JS/X + TS/X
+Plug 'HerringtonDarkholme/yats.vim' "(hi OK, indent TS OK / TSX NO)
+Plug 'maxmellon/vim-jsx-pretty'     "(hi NO, indent TS NO / TSX OK)
 
 call plug#end()
 
@@ -199,6 +204,8 @@ function! s:ApplyTheme()
   else
     call s:SetColorScheme()
   endif
+  "vim-jsx-pretty syntax
+  highlight jsxTagName ctermfg=Magenta
 endfunction
 
 function! s:GoyoEnter()
