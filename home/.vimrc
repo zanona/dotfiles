@@ -148,6 +148,7 @@ autocmd! User GoyoLeave nested call <SID>GoyoLeave()
 autocmd! InsertLeave,WinLeave * call <SID>OnInsertModeLeave()
 autocmd! BufEnter * let &titlestring = @%
 autocmd! BufWinEnter nested call disable_syntax_large_files()
+autocmd! BufNewFile,BufRead .*rc setfiletype json		"mark all .*rc files as json
 autocmd! BufEnter * call <SID>TabAdjust(0)
 command! TabToggle call <SID>TabAdjust(1)
 
