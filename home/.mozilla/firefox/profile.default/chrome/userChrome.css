@@ -2,34 +2,19 @@
 
 #TabsToolbar { visibility: collapse !important; }
 
+#nav-bar { opacity: 1; }
+#urlbar:not(.megabar)[focused="true"] { outline: none !important; }
+#urlbar:not(.megabar)[focused="true"] { border-width: 0 !important; }
 
-#nav-bar {
-  opacity: 1;
-}
-#urlbar {
-  //opacity: 0;
-}
-#urlbar:not(.megabar)[focused="true"] {
-  //opacity: 1;
-  outline: none !important;
-}
-#urlbar:not(.megabar)[focused="true"] {
-  border-width: 0 !important;
-}
-
-/*
 menupopup {
-	-moz-appearance: none !important;
-  font-size: 0.875em;
-	min-width: 280px !important;
-	padding: 8px 2px 8px 2px !important;
-	border-width: 0 !important;
-  color: #999999 !important;
-	background-color: #000000 !important;
+    -moz-appearance: none !important;
+    font-size: 0.875em;
+    min-width: 280px !important;
+    padding: 8px 2px 8px 2px !important;
+    border-width: 0 !important;
+    color: #999999 !important;
+    background-color: #000000 !important;
 }
-*/
-#sidebar-box #sidebar-header { visibility: collapse; } 
-#sidebar-splitter { display: none !important; }
 
 /* apply dark background when page is about to load */
 @-moz-document url(chrome://browser/content/browser.xhtml) {
@@ -38,7 +23,19 @@ menupopup {
   browser[type="content"],
   tabbrowser#content,
   #content,
-  browser[type="content"] > html {
-     background: black !important;
-  }
+  browser[type="content"] > html { background: black !important; }
+}
+
+#sidebar-box { background-color: black !important; }
+#sidebar-box #sidebar-header { visibility: collapse; } 
+#sidebar-splitter { display: none !important; }
+
+/* Tweaks to Tab center Reborn extension */
+#sidebar-box[sidebarcommand="tabcenter-reborn_ariasuni-sidebar-action"] {
+    overflow: hidden;
+    min-width: 36px;
+    max-width: 36px;
+    position: fixed;
+    transition: all 0.2s ease;
+    z-index: 2
 }
