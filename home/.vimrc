@@ -150,10 +150,19 @@ autocmd! BufEnter * let &titlestring = @%
 autocmd! BufWinEnter nested call disable_syntax_large_files()
 autocmd! BufNewFile,BufRead .*rc setfiletype json		"mark all .*rc files as json
 autocmd! BufEnter * call <SID>TabAdjust(0)
+autocmd! FileType * call <SID>SetupFileType()
 command! TabToggle call <SID>TabAdjust(1)
 
 " UTILITY METHODS
 " ==============================================================================
+
+function! s:SetupFileType()
+    if &filetype == "php"
+	" disabling php-foldexpr.vim foldtext and use mine
+	" let b:phpfold_text = 0 only assigns to current buffer
+	setlocal foldtext=MyFoldText()
+    endif
+endfunction
 
 function! s:disable_syntax_large_files()
   if line2byte(line("$") + 1) > 100000
