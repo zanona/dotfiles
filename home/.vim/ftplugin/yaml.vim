@@ -38,7 +38,7 @@ endfunction
 
 function! YAMLFoldText()
     let linestart = substitute(getline(v:foldstart),"^  ","",1)
-    return '+ ' . linestart
+    return '+' . repeat(' ', indent(v:foldstart) - 1) . trim(linestart) . '...'
 endfunction
 
 

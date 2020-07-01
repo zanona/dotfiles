@@ -31,6 +31,7 @@ Plug 'elzr/vim-json'
 Plug 'groenewege/vim-less'
 Plug 'cespare/vim-toml'
 Plug 'swekaj/php-foldexpr.vim'
+Plug 'plasticboy/vim-markdown'
 
 "JS/X + TS/X
 Plug 'HerringtonDarkholme/yats.vim' "(hi OK, indent TS OK / TSX NO)
@@ -84,6 +85,9 @@ let g:goyo_width = 104
 
 " JSON
 let g:vim_json_syntax_conceal = 0 " Disable Vim's quote hiding on JSON files
+" Markdown
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_folding_disabled = 1
 
 " Ale <https://github.com/w0rp/ale>
 let g:ale_linters = {'javascript': ['xo'], 'typescript': ['eslint','tsserver']}
