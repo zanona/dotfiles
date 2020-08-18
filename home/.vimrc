@@ -90,7 +90,21 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
 
 " Ale <https://github.com/w0rp/ale>
-let g:ale_linters = {'javascript': ['xo'], 'typescript': ['eslint','tsserver']}
+let g:ale_linters = {
+	    \ 'javascript':      ['eslint'],
+	    \ 'typescript':      ['eslint','tsserver'],
+	    \ 'javascriptreact': ['eslint'],
+	    \ 'typescriptreact': ['eslint','tsserver'],
+	    \ }
+let g:ale_fixers = {
+	    \ '*':               ['remove_trailing_lines', 'trim_whitespace'],
+	    \ 'javascript':      ['eslint', 'prettier'],
+	    \ 'typescript':      ['eslint', 'prettier'],
+	    \ 'javascriptreact': ['eslint', 'prettier'],
+	    \ 'typescriptreact': ['eslint', 'prettier'],
+	    \ 'php':             ['phpcbf', 'prettier'],
+	    \}
+let g:ale_fix_on_save = 1
 let g:ale_less_lessc_options = '--html'
 
 "Extend Emmet functionality
@@ -257,6 +271,6 @@ function! s:TabAdjust(toggle)
   else
     set shiftwidth=4
     set softtabstop=4
-    set listchars=nbsp:☠,tab:\ \ 
+    set listchars=nbsp:☠,tab:\ \  
   endif
 endfunction
