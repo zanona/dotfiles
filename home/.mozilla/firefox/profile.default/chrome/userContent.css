@@ -9,3 +9,22 @@
     .search-filters-wrap::before,
     .search-filters-wrap::after { content: none !important; }
 }
+
+@-moz-document domain(app.asana.com) {
+    .Board, .Sidebar, .AsanaPageTopbar { user-select: none !important; }
+    .TabNavigationBar-list li:nth-child(n+3),
+    .PageToolbarStructure-rightChildren div:nth-of-type(n+4):not(:last-of-type),
+    .TopbarPageHeaderStructure-titleRightElement,
+    .TopbarPageHeaderStructure-icons,
+    .ProjectHeaderFacepile-joinOrShareButton,
+    .SidebarTopNavLinks-myTasksButton,
+    .SidebarTopNavLinks-myPortfoliosbutton,
+    .SidebarTopNavLinks-goalsButton,
+    .SidebarReports,
+    .Sidebar-browseMoreTeams,
+    .SidebarInvite,
+    .SidebarTeamsList,
+    .SidebarCollapsibleHeader,
+    .SidebarFavoritesAndMore-showMoreOrLessButton,
+    .UpgradeButton { display: none !important; }
+}
