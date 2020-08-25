@@ -32,6 +32,7 @@ Plug 'groenewege/vim-less'
 Plug 'cespare/vim-toml'
 Plug 'swekaj/php-foldexpr.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'Clavelito/indent-sh.vim'
 
 "JS/X + TS/X
 Plug 'HerringtonDarkholme/yats.vim' "(hi OK, indent TS OK / TSX NO)
@@ -271,6 +272,6 @@ function! s:TabAdjust(toggle)
   else
     set shiftwidth=4
     set softtabstop=4
-    set listchars=nbsp:☠,tab:\ \  
+    set listchars=nbsp:☠,tab:\ \ "protect white-space trimming with a comment
   endif
 endfunction
