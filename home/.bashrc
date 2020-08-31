@@ -21,6 +21,7 @@ alias docker-cleanup='\
   docker rmi $(docker images -a -q) && \
   docker rm $(docker ps -a -f status=exited -q)'
 alias yay-update='yay -Syu --devel --timeupdate'
+alias diff='diff -bw --color'
 
 PS1='\$ '
 # when in vim subshell change PS1 for clarity
