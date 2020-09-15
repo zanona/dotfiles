@@ -98,7 +98,7 @@ let g:ale_linters = {
 	    \ 'typescriptreact': ['eslint','tsserver'],
 	    \ }
 let g:ale_fixers = {
-	    \ '*':               ['remove_trailing_lines', 'trim_whitespace'],
+	    \ '*':               ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
 	    \ 'javascript':      ['eslint', 'prettier'],
 	    \ 'typescript':      ['eslint', 'prettier'],
 	    \ 'javascriptreact': ['eslint', 'prettier'],
