@@ -2,13 +2,18 @@
 	name = Marcus Zanona
 	email = marcus@zanona.co
 	signingkey = AB8BB9581AB0CA25
+[push]
+	default = simple
+[pull]
+  rebase = true
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
 [commit]
 	gpgsign = true
 [gpg]
 	program = gpg
-
-[mergetool]
-	keepBackup = false
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
@@ -16,8 +21,6 @@
 	helper = store
 [difftool]
 	prompt = false
-[push]
-	default = simple
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
@@ -35,7 +38,3 @@
 	last-commit = "!git branch -r --sort=-committerdate | grep $1 | xargs -n1 git log -1 --decorate --oneline | grep -v 'skip ci' #"
 	check-conflicts = "!git branch -r --sort=-committerdate | grep $1 | xargs -I % sh -c 'git diff --check > /dev/null % && echo [OK] % || echo [CONFLICT] %' #"
 	merge-branches = "!git branch -r --sort=-committerdate | grep $1 | grep -v ${2:-__} | xargs git merge #"
-[merge]
-	tool = vimdiff
-[pull]
-	rebase = true
