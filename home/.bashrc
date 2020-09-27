@@ -23,6 +23,7 @@ alias docker-cleanup='\
 alias yay-update='yay -Syu --devel --timeupdate'
 alias diff='diff -bw --color'
 alias npm-update='npx npm-check -u'
+alias xclip='xclip -selection clipboard'
 
 PS1='\$ '
 # when in vim subshell change PS1 for clarity
