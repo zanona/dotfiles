@@ -27,7 +27,7 @@ menupopup {
 }
 
 #sidebar-box { background-color: black !important; }
-#sidebar-box #sidebar-header { visibility: collapse; } 
+#sidebar-box #sidebar-header { visibility: collapse; }
 #sidebar-splitter { display: none !important; }
 
 /* Tweaks to Tab center Reborn extension */

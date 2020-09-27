@@ -26,5 +26,7 @@
     .SidebarTeamsList,
     .SidebarCollapsibleHeader,
     .SidebarFavoritesAndMore-showMoreOrLessButton,
-    .UpgradeButton { display: none !important; }
+    .UpgradeButton,
+    .FeatureStageIndicator
+    { display: none !important; }
 }
