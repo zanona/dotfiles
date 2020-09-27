@@ -18,7 +18,7 @@ setxkbmap us mac
 # apply .Xmodmap for vim style navigation
 xmodmap ~/.Xmodmap
 
-feh --no-fehbg --bg-fill ~/tmp/bg.jpg
+#feh --no-fehbg --bg-fill ~/tmp/bg.jpg
 xscreensaver &
 unclutter &
 dwmbar &
