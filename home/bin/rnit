@@ -1,0 +1,44 @@
+#!/usr/bin/sh
+
+VERSION=1.0.0
+
+usage() {
+    cat <<EOF
+usage: rnit [-h] <projectName> <dir>
+optional arguments:
+-h, --help           Show this help message
+-v, --version        Print version
+EOF
+}
+
+init() {
+    origin=$(pwd)
+    project=$1
+    dir=$2
+    npx react-native init \
+	--template react-native-template-typescript \
+	--directory "$dir" \
+	--npm --skip-install \
+	"$project"
+    cd "$dir" || exit
+    git init
+    touch .env
+    make install
+    printf "\n# Env file\n.env\n" >> .gitignore
+    git add .
+    cd "$origin" || exit
+}
+
+main() {
+    while [ "$1" ]; do
+	case "$1" in
+	    --help | -h) usage && exit ;;
+	    --version | -v) echo $VERSION && exit ;;
+	    -*) echo "Error: option $1 does not exist" ;;
+	    *) init "$@" && exit ;;
+	esac
+	shift
+    done
+}
+
+main "$@";

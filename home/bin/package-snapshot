@@ -3,26 +3,51 @@
 # help from: https://stackoverflow.com/questions/2559076/
 
 get_system_packages() {
-	pacman -Qq -g base -g base-devel | sort | uniq
+    #pacman -Qq -g base -g base-devel | sort | uniq
+    pacman -Qq -g base-devel | sort | uniq
 }
 get_explicit_packages() {
-	pacman -Qteq | sort
+    pacman -Qteq | sort
 }
 
-# Explicit packages installed by the user 
+# Explicit packages installed by the user
 # excluding base and base-devel
 
 get_user_packages() {
-	comm -23 <(get_explicit_packages) <(get_system_packages)
+    comm -23 <(get_explicit_packages) <(get_system_packages)
+}
+
+fmt_package() {
+    n=1
+    package='@'
+    head -n6 | while read line; do
+	if [ $n = 2 ]; then
+	    package+="$package$line"
+	fi
+	n=$((n+1))
+    done | echo $package
 }
 
 save_packages() {
-	if [ ! -f $1 ]; then
-		echo "creating" $1
-		touch $1
-	fi
-	comm -2 <(get_user_packages) $1 > $1
-	echo $1 "updated"
+    if [ ! -f $1 ]; then
+	echo "creating" $1
+	touch $1
+    fi
+    #comm -2 <(get_user_packages) $1 > $1
+    export -f fmt_package
+    comm -2 <(get_user_packages) $1 | xargs yay -Si | sed 's/^$/\x0/' | cut -d ':' -f 2 | split -l1 -t '\0' --filter 'fmt_package' #xargs -n1 -0 sh -c 'echo FFF$@ | head -n1' _ #split -l1 -t "\0" --filter 'xargs fmt_package' --verbose
+    #echo $1 "updated"
 }
 
 save_packages "$HOME/.packages";
+
+
+#process() {
+#	#split stdout by nul byte, then trim nul byte, and use 1st line as filename, saving to products/$f.md
+#	ts-node -sT "$dir/lib/pull.ts" $col $@ | split -l1 -t "\0" --filter '{ read f; tr -d "\00" > "$dir/../products/$f"; }'
+#}
+#
+#export -f process;
+#
+## throttle to 100 docs/process
+#echo $@ | xargs -n 100 -P 1 sh -c 'process $@' _
