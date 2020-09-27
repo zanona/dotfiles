@@ -33,10 +33,12 @@ Plug 'cespare/vim-toml'
 Plug 'swekaj/php-foldexpr.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'Clavelito/indent-sh.vim'
+Plug 'projectfluent/fluent.vim'
 
 "JS/X + TS/X
 Plug 'HerringtonDarkholme/yats.vim' "(hi OK, indent TS OK / TSX NO)
 Plug 'maxmellon/vim-jsx-pretty'     "(hi NO, indent TS NO / TSX OK)
+
 
 call plug#end()
 
