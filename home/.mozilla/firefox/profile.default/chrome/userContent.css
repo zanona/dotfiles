@@ -13,7 +13,9 @@
 @-moz-document domain(app.asana.com) {
     .Board, .Sidebar, .AsanaPageTopbar { user-select: none !important; }
     .TabNavigationBar-list li:nth-child(n+3),
-    .PageToolbarStructure-rightChildren div:nth-of-type(n+4):not(:last-of-type),
+    .PageToolbarStructure-rightChildren div:nth-of-type(4),
+    .PageToolbarStructure-rightChildren div:nth-of-type(5),
+    .PageToolbarStructure-rightChildren div:nth-of-type(6),
     .TopbarPageHeaderStructure-titleRightElement,
     .TopbarPageHeaderStructure-icons,
     .ProjectHeaderFacepile-joinOrShareButton,
