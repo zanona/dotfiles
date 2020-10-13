@@ -75,9 +75,10 @@ set list                          " Show invisible marked chars
 set nowrap                        " Prevet line-wrapping by default
 set colorcolumn=80                " Show column for 80 chars
 set clipboard=unnamed             " Reset clipboard to work with tmux on OSX Sierra (goo.gl/KjXTkP)
-"set shell=sh                      " Setting shell for vim
-set shell=bash\ -l                " Keep same Shell profile when running sh or ! (goo.gl/itWE3c)
 set modeline                      " Use vim modeline comment at end of files, if existent
+"set shell=sh                     " Setting shell for vim
+"set shell=bash\ -l               " Keep same Shell profile when running sh or ! (goo.gl/itWE3c)
+				  " WARNING: this sources .profile a lot when " using ALE
 
 let loaded_netrwPlugin = 1        " Disable Netrw (vim file-manager)
 
