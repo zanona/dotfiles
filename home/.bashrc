@@ -12,7 +12,8 @@ export EDITOR=vim
 # If not running interactively, don't do anything
 # [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='ls -A -v --color=auto'
+alias ll='ls -l'
 alias vi='vim'
 alias pacman-cleanup='yay -Rsn $(yay -Qtdq)'
 alias incognito='firefox --private-window'

@@ -15,3 +15,4 @@ fi
 export DRONE_SERVER=https://drone.zanona.co
 export DRONE_TOKEN
 export DRONE_RPC_SECRET
+clear
