@@ -1,0 +1,42 @@
+#!/usr/bin/sh
+
+VERSION=1.0.0
+DEFAULT_IMAGE=node:alpine
+
+usage() {
+    cat <<EOF
+dk: run docker image shell from cwd
+usage: dk [-h] <image>
+optional arguments:
+-h, --help           Show this help message
+-v, --version        Print version $VERSION
+image                start-up docker image (defaults to $DEFAULT_IMAGE)
+EOF
+}
+
+init() {
+    IMAGE=${1:-$DEFAULT_IMAGE}
+    docker exec -it tmp sh -c "cd /mnt/app && sh" 2> /dev/null || \
+    docker run \
+	-v "$(pwd)":/mnt/app \
+	--network host \
+	--name tmp \
+	--rm \
+	-it \
+	"$IMAGE" \
+	sh -c "cd /mnt/app && sh"
+}
+
+main() {
+    while [ "$1" ]; do
+	case "$1" in
+	    --help | -h) usage && exit ;;
+	    --version | -v) echo $VERSION && exit ;;
+	    -*) echo "Error: option $1 does not exist" && exit 1 ;;
+	esac
+	shift
+    done
+    init "$@"
+}
+
+main "$@"
