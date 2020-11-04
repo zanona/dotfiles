@@ -16,15 +16,16 @@ EOF
 
 init() {
     IMAGE=${1:-$DEFAULT_IMAGE}
-    docker exec -it tmp sh -c "cd /mnt/app && sh" 2> /dev/null || \
+    docker exec -it --entrypoint /bin/sh tmp -c "cd /mnt/app && sh" 2> /dev/null || \
     docker run \
 	-v "$(pwd)":/mnt/app \
 	--network host \
 	--name tmp \
+	--entrypoint /bin/sh \
 	--rm \
 	-it \
 	"$IMAGE" \
-	sh -c "cd /mnt/app && sh"
+	-c "cd /mnt/app && sh"
 }
 
 main() {
@@ -34,9 +35,10 @@ main() {
 	    --version | -v) echo $VERSION && exit ;;
 	    -*) echo "Error: option $1 does not exist" && exit 1 ;;
 	esac
+	init "$@" && exit
 	shift
     done
-    init "$@"
+    init
 }
 
 main "$@"
