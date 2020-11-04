@@ -9,3 +9,7 @@ user_pref("svg.context-properties.content.enabled", true); 				// default is fal
 
 /* Replicate Chrome's "Not Secure" text on HTTP */
 //user_pref("security.insecure_connection_text.enabled", true);
+
+
+/* Do not use system notification alerts so it can be customised through userChrome */
+user_pref("alerts.useSystemBackend", false); // default true
