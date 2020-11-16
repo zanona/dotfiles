@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "lastUserContextId": 8,
+  "lastUserContextId": 9,
   "identities": [
     { "name": "userContextIdInternal.webextStorageLocal", "userContextId": 4294967295, "public": false, "icon": "", "color": "", "accessKey": "" },
     { "name": "userContextIdInternal.thumbnail", "userContextId": 5, "public": false, "icon": "", "color": "", "accessKey": "" },
@@ -8,6 +8,7 @@
     { "name": "BW", "userContextId": 3, "public": true, "icon": "briefcase", "color": "yellow" },
     { "name": "ZC", "userContextId": 2, "public": true, "icon": "briefcase", "color": "purple" },
     { "name": "LN", "userContextId": 4, "public": true, "icon": "briefcase", "color": "yellow" },
+    { "name": "WC", "userContextId": 9, "public": true, "icon": "briefcase", "color": "blue"  },
     { "name": "CY", "userContextId": 7, "public": true, "icon": "dollar", "color": "orange" },
     { "name": "IN", "userContextId": 8, "public": true, "icon": "chill", "color": "blue" },
     { "name": "SH", "userContextId": 6, "public": true, "icon": "cart", "color": "orange" }
