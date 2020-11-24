@@ -34,10 +34,13 @@ Plug 'swekaj/php-foldexpr.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'Clavelito/indent-sh.vim'
 Plug 'projectfluent/fluent.vim'
+Plug 'pangloss/vim-javascript'
 
 "JS/X + TS/X
 Plug 'HerringtonDarkholme/yats.vim' "(hi OK, indent TS OK / TSX NO)
 Plug 'maxmellon/vim-jsx-pretty'     "(hi NO, indent TS NO / TSX OK)
+
+Plug 'delphinus/vim-firestore' "Security rules syntax
 
 
 call plug#end()
@@ -101,12 +104,14 @@ let g:ale_linters = {
 	    \ 'typescriptreact': ['eslint','tsserver'],
 	    \ }
 let g:ale_fixers = {
-	    \ '*':               ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
+	    \ '*':               ['remove_trailing_lines', 'trim_whitespace'],
+	    \ 'html':		 ['eslint', 'prettier'],
+	    \ 'php':             ['phpcbf', 'prettier'],
+	    \ 'yaml':		 ['eslint', 'prettier'],
 	    \ 'javascript':      ['eslint', 'prettier'],
 	    \ 'typescript':      ['eslint', 'prettier'],
 	    \ 'javascriptreact': ['eslint', 'prettier'],
 	    \ 'typescriptreact': ['eslint', 'prettier'],
-	    \ 'php':             ['phpcbf', 'prettier'],
 	    \}
 let g:ale_fix_on_save = 1
 let g:ale_less_lessc_options = '--html'
