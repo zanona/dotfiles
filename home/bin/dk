@@ -16,11 +16,12 @@ EOF
 
 init() {
     IMAGE=${1:-$DEFAULT_IMAGE}
-    docker exec -it --entrypoint /bin/sh tmp -c "cd /mnt/app && sh" 2> /dev/null || \
+    NAME=$(echo "$IMAGE" | tr /: _)
+    docker exec -it "$NAME" /bin/sh -c "cd /mnt/app && sh" 2>/dev/null || \
     docker run \
 	-v "$(pwd)":/mnt/app \
 	--network host \
-	--name tmp \
+	--name "$NAME" \
 	--entrypoint /bin/sh \
 	--rm \
 	-it \
