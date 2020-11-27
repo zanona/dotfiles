@@ -25,6 +25,7 @@ alias yay-update='yay -Syu --devel --timeupdate'
 alias diff='diff -bw --color'
 alias npm-update='npx npm-check -u'
 alias xclip='xclip -selection clipboard'
+alias ninja='if [ -z "$PS1" ]; then tput cnorm; PS1="$ "; else tput civis; PS1=; fi'
 
 PS1='\$ '
 # when in vim subshell change PS1 for clarity
