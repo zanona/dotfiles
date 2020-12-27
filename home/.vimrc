@@ -106,9 +106,11 @@ let g:ale_linters = {
 let g:ale_fixers = {
 	    \ '*':               ['remove_trailing_lines', 'trim_whitespace'],
 	    \ 'html':		 ['eslint', 'prettier'],
+	    \ 'markdown': 	 ['eslint', 'prettier'],
 	    \ 'php':             ['phpcbf', 'prettier'],
 	    \ 'yaml':		 ['eslint', 'prettier'],
 	    \ 'javascript':      ['eslint', 'prettier'],
+	    \ 'json':            ['eslint', 'prettier'],
 	    \ 'typescript':      ['eslint', 'prettier'],
 	    \ 'javascriptreact': ['eslint', 'prettier'],
 	    \ 'typescriptreact': ['eslint', 'prettier'],
