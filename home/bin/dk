@@ -1,23 +1,28 @@
 #!/usr/bin/sh
 
 VERSION=1.0.0
-DEFAULT_IMAGE=node:alpine
+DEFAULT_IMAGE=node:12-alpine
+DEFAULT_CMD="sh"
 
 usage() {
     cat <<EOF
 dk: run docker image shell from cwd
-usage: dk [-h] <image>
+usage: dk [-h] <image> [cmd]
 optional arguments:
 -h, --help           Show this help message
 -v, --version        Print version $VERSION
-image                start-up docker image (defaults to $DEFAULT_IMAGE)
+--new		     spin new container instead of joining existing one
+image                start-up docker image (defaul: $DEFAULT_IMAGE)
+cmd                  run container with specific command (default: sh)
 EOF
 }
 
 init() {
-    IMAGE=${1:-$DEFAULT_IMAGE}
-    NAME=$(echo "$IMAGE" | tr /: _)
-    docker exec -it "$NAME" /bin/sh -c "cd /mnt/app && sh" 2>/dev/null || \
+    NEW="$1"
+    IMAGE="$2"
+    CMD="$3"
+    NAME=$([ -z "$NEW" ] && echo "$IMAGE" | tr /: _)
+    ([ -z "$NEW" ] && docker exec -it "$NAME" /bin/sh -c "cd /mnt/app && sh" 2>/dev/null) || \
     docker run \
 	-v "$(pwd)":/mnt/app \
 	--network host \
@@ -26,7 +31,7 @@ init() {
 	--rm \
 	-it \
 	"$IMAGE" \
-	-c "cd /mnt/app && sh"
+	-c "cd /mnt/app && $CMD"
 }
 
 main() {
@@ -34,12 +39,15 @@ main() {
 	case "$1" in
 	    --help | -h) usage && exit ;;
 	    --version | -v) echo $VERSION && exit ;;
+	    --new) NEW=1 && shift ;;
 	    -*) echo "Error: option $1 does not exist" && exit 1 ;;
+	    *)
+		if [ -z "$IMAGE" ]; then IMAGE="$1"; else CMD="$1"; fi
+		shift;
+		;;
 	esac
-	init "$@" && exit
-	shift
     done
-    init
+    init "$NEW" "${IMAGE:-$DEFAULT_IMAGE}" "${CMD:-$DEFAULT_CMD}" && exit
 }
 
 main "$@"
