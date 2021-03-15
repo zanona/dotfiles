@@ -13,8 +13,6 @@
 @-moz-document domain(app.asana.com) {
     .Board, .Sidebar, .AsanaPageTopbar { user-select: none !important; }
     .TabNavigationBar-list li:nth-child(n+3),
-    .PageToolbarStructure-rightChildren div:nth-of-type(5),
-    .PageToolbarStructure-rightChildren div:nth-of-type(6),
     .TopbarPageHeaderStructure-titleRightElement,
     .TopbarPageHeaderStructure-icons,
     .ProjectHeaderFacepile-joinOrShareButton,
@@ -26,10 +24,13 @@
     .SidebarTeamsList,
     .SidebarCollapsibleHeader,
     .SidebarFavoritesAndMore-showMoreOrLessButton,
+    .SidebarFavoritesAndMore-favoritesSection,
     .UpgradeButton,
     .FeatureStageIndicator,
     .DateRangeV2-addDateRangeUpsell,
     .SidebarInvite--stickyInvite.Sidebar-stickyInvite,
-    .TopbarSettingsMenu-upgrade
+    .TopbarSettingsMenu-upgrade,
+    .AutomationSection,
+    .ProjectMembersDialogPrivacyStatus-upgradeButton
     { display: none !important; }
 }
