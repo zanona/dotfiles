@@ -42,6 +42,9 @@ Plug 'maxmellon/vim-jsx-pretty'     "(hi NO, indent TS NO / TSX OK)
 
 Plug 'delphinus/vim-firestore' "Security rules syntax
 
+" IDE
+Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
+
 
 call plug#end()
 
@@ -98,6 +101,7 @@ let g:vim_markdown_folding_disabled = 1
 
 " Ale <https://github.com/w0rp/ale>
 let g:ale_linters = {
+	    \ 'json':            ['jq'],
 	    \ 'javascript':      ['eslint'],
 	    \ 'typescript':      ['eslint','tsserver'],
 	    \ 'javascriptreact': ['eslint'],
@@ -105,12 +109,14 @@ let g:ale_linters = {
 	    \ }
 let g:ale_fixers = {
 	    \ '*':               ['remove_trailing_lines', 'trim_whitespace'],
+	    \ 'markdown': 	 ['prettier'],
+	    \ 'css':		 ['prettier'],
 	    \ 'html':		 ['eslint', 'prettier'],
-	    \ 'markdown': 	 ['eslint', 'prettier'],
+	    \ 'less':		 ['eslint', 'prettier'],
 	    \ 'php':             ['phpcbf', 'prettier'],
 	    \ 'yaml':		 ['eslint', 'prettier'],
+	    \ 'json':            ['prettier'],
 	    \ 'javascript':      ['eslint', 'prettier'],
-	    \ 'json':            ['eslint', 'prettier'],
 	    \ 'typescript':      ['eslint', 'prettier'],
 	    \ 'javascriptreact': ['eslint', 'prettier'],
 	    \ 'typescriptreact': ['eslint', 'prettier'],
@@ -145,6 +151,10 @@ let g:user_emmet_settings = {
 \  },
 \}
 
+" COC options
+let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver' ]
+
+
 " MAPPINGS
 " ==============================================================================
 
@@ -170,6 +180,25 @@ nmap <silent> H :vertical resize -5<CR>
 nmap <silent> J :resize +5<CR>
 nmap <silent> K :resize -5<CR>
 
+" Coc mappings
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Map <tab> to trigger completion and navigate to the next item:
+" :h coc-completion
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+	    \ pumvisible() ? "\<C-n>" :
+	    \ <SID>check_back_space() ? "\<TAB>" :
+	    \ coc#refresh()
+
 " Follow symlink (resolve) when opening in buffer
 " https://vim.fandom.com/wiki/Replace_a_builtin_command_using_cabbrev
 " https://stackoverflow.com/questions/30791692/make-vim-follow-symlinks-when-opening-files-from-command-line
@@ -187,6 +216,11 @@ autocmd! BufWinEnter nested call disable_syntax_large_files()
 autocmd! BufNewFile,BufRead .*rc setfiletype json		"mark all .*rc files as json
 autocmd! BufEnter * call <SID>TabAdjust(0)
 autocmd! FileType * call <SID>SetupFileType()
+
+" retain scroll position when switching buffers
+" https://vi.stackexchange.com/a/8997
+autocmd! BufWinLeave * let b:winview = winsaveview()
+autocmd! BufWinEnter * if exists('b:winview') | call winrestview(b:winview) | unlet b:winview
 command! TabToggle call <SID>TabAdjust(1)
 
 " UTILITY METHODS
