@@ -19,13 +19,15 @@ alias pacman-cleanup='yay -Rsn $(yay -Qtdq)'
 alias incognito='firefox --private-window'
 alias reset-keys='setxkbmap -layout us'
 alias docker-cleanup='\
-  docker rmi $(docker images -a -q) && \
-  docker rm $(docker ps -a -f status=exited -q)'
+  sudo docker rmi -f $(docker images -a -q) && \
+  sudo docker rm -f $(docker ps -a -f status=exited -q)'
 alias yay-update='yay -Syu --devel --timeupdate'
 alias diff='diff -bw --color'
 alias npm-update='npx npm-check -u'
 alias xclip='xclip -selection clipboard'
-alias ninja='if [ -z "$PS1" ]; then tput cnorm; PS1="$ "; else tput civis; PS1=; fi'
+alias ninja='if [ -z "$PS1" ]; then tput cnorm; PS1="$ "; else tput civis; PS1=; clear; fi'
+alias ntp-sync='sudo ntpdate -s ch.pool.ntp.org'
+alias mpv-flip='mpv --vf=hflip'
 
 PS1='\$ '
 # when in vim subshell change PS1 for clarity
